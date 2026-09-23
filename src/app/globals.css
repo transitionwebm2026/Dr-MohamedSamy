@@ -1,0 +1,207 @@
+@import "tailwindcss";
+
+/*
+ * Tailwind v4 uses CSS-native theming instead of tailwind.config.js.
+ * Every --color-* / --font-* / --animate-* token below is auto-exposed
+ * as a utility class (e.g. --color-brand-primary -> bg-brand-primary,
+ * text-brand-primary, border-brand-primary, etc).
+ */
+@theme {
+  --color-brand-primary: #6e4b98;
+  --color-brand-dark: #290b4c;
+  --color-brand-rose: #e1949f;
+  --color-brand-light: #a97fc9;
+  --color-brand-surface: #150726;
+  --color-brand-surface-2: #200e38;
+  --color-brand-ink: #f5eefc;
+  --color-brand-ink-muted: #cbb8de;
+  --color-brand-whatsapp: #25d366;
+}
+
+@theme inline {
+  --font-tajawal: var(--font-tajawal);
+  --font-montserrat: var(--font-montserrat);
+
+  --animate-float-slow: float 9s ease-in-out infinite;
+  --animate-float-slower: float 13s ease-in-out infinite;
+  --animate-blob: blob 16s ease-in-out infinite;
+  --animate-shimmer: shimmer 2.6s linear infinite;
+  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+  --animate-marquee: marquee 34s linear infinite;
+}
+
+:root {
+  --background: var(--color-brand-surface);
+  --foreground: var(--color-brand-ink);
+}
+
+* {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background:
+    radial-gradient(120% 90% at 12% -10%, rgba(110, 75, 152, 0.35), transparent 55%),
+    radial-gradient(90% 70% at 100% 0%, rgba(169, 127, 201, 0.18), transparent 50%),
+    radial-gradient(100% 80% at 100% 0%, rgba(225, 148, 159, 0.16), transparent 50%),
+    radial-gradient(140% 100% at 50% 120%, rgba(41, 11, 76, 0.65), transparent 60%),
+    var(--color-brand-surface);
+  color: var(--foreground);
+  font-family: var(--font-tajawal), "Tajawal", sans-serif;
+}
+
+::selection {
+  background: var(--color-brand-rose);
+  color: var(--color-brand-dark);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-brand-surface);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-brand-rose), var(--color-brand-primary));
+  border-radius: 999px;
+}
+
+/* ---------- Glassmorphism utilities ---------- */
+@utility glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 8px 32px 0 rgba(21, 7, 38, 0.35);
+}
+
+@utility glass-strong {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04));
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 20px 60px -10px rgba(41, 11, 76, 0.55);
+}
+
+@utility gradient-brand {
+  background: linear-gradient(
+    120deg,
+    var(--color-brand-dark) 0%,
+    var(--color-brand-primary) 45%,
+    var(--color-brand-light) 75%,
+    var(--color-brand-rose) 100%
+  );
+}
+
+/* Vivid variant for small / wide elements (pills, chips, FABs) — skips the
+   near-black dark stop, which reads as a black blob once stretched across a
+   short, wide shape instead of a visible diagonal transition. */
+@utility gradient-brand-vivid {
+  background: linear-gradient(
+    100deg,
+    var(--color-brand-primary) 0%,
+    var(--color-brand-light) 50%,
+    var(--color-brand-rose) 100%
+  );
+}
+
+@utility gradient-brand-text {
+  background: linear-gradient(
+    90deg,
+    var(--color-brand-rose) 0%,
+    var(--color-brand-light) 35%,
+    #f6e2ea 60%,
+    var(--color-brand-rose) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility glow-border {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      var(--color-brand-rose),
+      var(--color-brand-light),
+      var(--color-brand-primary),
+      var(--color-brand-rose)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.55;
+    transition: opacity 0.35s ease;
+  }
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+@utility text-balance-ar {
+  text-wrap: balance;
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50% { transform: translateY(-22px) translateX(10px); }
+}
+
+@keyframes blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(24px, -30px) scale(1.08); }
+  66% { transform: translate(-20px, 18px) scale(0.94); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(225, 148, 159, 0.45); }
+  50% { box-shadow: 0 0 0 14px rgba(225, 148, 159, 0); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ---------- Swiper brand overrides ---------- */
+.swiper-pagination-bullet {
+  background: var(--color-brand-ink-muted);
+  opacity: 0.4;
+  width: 8px;
+  height: 8px;
+  transition: all 0.3s ease;
+}
+.swiper-pagination-bullet-active {
+  background: var(--color-brand-rose);
+  opacity: 1;
+  width: 24px;
+  border-radius: 999px;
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, var(--color-brand-ink-muted) 25%, #ffffff 50%, var(--color-brand-ink-muted) 75%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: var(--animate-shimmer);
+}

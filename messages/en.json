@@ -1,0 +1,914 @@
+{
+  "site": {
+    "name": "Dr. Mohamed Sami",
+    "nameEn": "Dr. Mohamed Sami",
+    "title": "Consultant of Gastroenterology, Hepatology & Endoscopy",
+    "description": "Dr. Mohamed Sami, Consultant of Gastroenterology, Hepatology & Endoscopy, with over 18 years of experience and 10,000+ successful endoscopies. Book your appointment now.",
+    "address": "Dr. Mohamed Sami Clinic, Cairo, Egypt"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "videos": "Videos",
+    "reviews": "Reviews",
+    "articles": "Articles",
+    "contact": "Contact Us",
+    "bookNow": "Book Now",
+    "openMenu": "Open menu"
+  },
+  "hero": {
+    "titleLine1": "Dr. Mohamed Sami",
+    "titleLine2": "Your Journey to Complete Digestive Health",
+    "subtitle": "Accurate diagnosis, safe endoscopy with the latest technology, and complete, compassionate care — backed by over 18 years of experience treating digestive and liver diseases.",
+    "bookNow": "Book Your Appointment",
+    "exploreServices": "Explore Our Services",
+    "callUs": "Call us"
+  },
+  "stats": {
+    "healed": "Recovered Cases",
+    "experience": "Years of Experience",
+    "endoscopies": "Successful Endoscopies",
+    "patients": "Trusting Patients"
+  },
+  "symptoms": {
+    "eyebrow": "What's Bothering You?",
+    "title": "Discover the Cause, Start Your Treatment Plan",
+    "description": "Choose the symptom closest to your case, and let our medical team guide you to an accurate diagnosis and effective treatment.",
+    "cta": "View All Services",
+    "items": {
+      "reflux": {
+        "title": "Acid Reflux & Heartburn",
+        "description": "Feeling a burning sensation in your chest after eating or while sleeping? It could be acid reflux — and it has a fast, effective treatment."
+      },
+      "stomach": {
+        "title": "Stomach & Colon Pain",
+        "description": "Bloating, cramps, or colon disorders affecting your daily life? We help you pinpoint the cause with precision."
+      },
+      "liver": {
+        "title": "Liver & Gallbladder Issues",
+        "description": "Persistent fatigue, jaundice, or abnormal test results? Our team specializes in liver and gallbladder diseases."
+      }
+    }
+  },
+  "about": {
+    "eyebrow": "Meet the Doctor",
+    "title": "Mohamed Sami.. A Passion for Precise Diagnosis and Compassionate Care",
+    "description": "Over 18 years of specialized experience diagnosing and treating digestive and liver diseases. My mission is for every patient to get their full time, an accurate diagnosis, and a treatment plan tailored to their case.",
+    "playAria": "Play the doctor's introduction video",
+    "closeAria": "Close",
+    "qualifications": {
+      "phd": "PhD in Gastroenterology & Hepatology – Cairo University",
+      "fellowship": "European Fellowship in Advanced Interventional Endoscopy",
+      "member": "Member of the Egyptian Society of Gastroenterology"
+    }
+  },
+  "treatments": {
+    "eyebrow": "Key Procedures & Treatments",
+    "title": "Comprehensive Treatment Solutions for Your Digestive Health",
+    "description": "Treatment programs built on the latest global medical protocols, with careful follow-up from diagnosis to recovery.",
+    "readMore": "Read More",
+    "cta": "View All Services",
+    "items": {
+      "ulcer": {
+        "title": "Ulcer & Inflammation Treatment",
+        "description": "Comprehensive treatment programs for stomach and duodenal ulcers and digestive inflammation using the latest protocols."
+      },
+      "varices": {
+        "title": "Esophageal Varices Treatment",
+        "description": "Precise, safe interventions for esophageal and liver varices using advanced endoscopic techniques."
+      },
+      "chronic": {
+        "title": "Chronic Liver Disease Management",
+        "description": "Comprehensive follow-up and care for patients with hepatitis and liver cirrhosis using the latest treatment methods."
+      }
+    }
+  },
+  "endoscopy": {
+    "eyebrow": "Endoscopy Unit",
+    "title": "An Endoscopy Unit Equipped with the Latest Global Technology",
+    "description": "A specialized medical and nursing team, and high-resolution imaging devices, for a safe and comfortable experience in every procedure.",
+    "cta": "View All Services",
+    "items": {
+      "gastroscopy": {
+        "title": "Diagnostic Gastroscopy",
+        "description": "A fast, precise examination of the esophagus, stomach, and duodenum lining using the latest high-resolution endoscopes."
+      },
+      "colonoscopy": {
+        "title": "Colonoscopy",
+        "description": "Early detection of tumors and polyps, with treatment in the same session, under complete safety and comfortable sedation."
+      },
+      "ercp": {
+        "title": "Therapeutic Endoscopy (ERCP)",
+        "description": "Advanced therapeutic interventions for the bile ducts and pancreas without the need for open surgery."
+      }
+    }
+  },
+  "journey": {
+    "eyebrow": "Step by Step",
+    "title": "Your Journey From Symptoms to Diagnosis and Treatment",
+    "description": "A clear, organized medical path, designed to make you feel safe and reassured from the first consultation to full recovery.",
+    "steps": {
+      "consultation": {
+        "title": "Consultation",
+        "description": "A full listening session about your symptoms and medical history to precisely understand your case."
+      },
+      "diagnosis": {
+        "title": "Precise Diagnosis",
+        "description": "Specialized tests and examinations to reach the correct diagnosis the first time."
+      },
+      "treatment": {
+        "title": "Treatment & Endoscopy",
+        "description": "A customized treatment plan, with an endoscopy procedure if needed, using the latest technology."
+      },
+      "followup": {
+        "title": "Follow-up & Recovery",
+        "description": "Regular follow-up to ensure your condition is stable and full recovery is achieved."
+      }
+    }
+  },
+  "whyChooseUs": {
+    "eyebrow": "Why Choose Us?",
+    "title": "Why Dr. Mohamed Sami?",
+    "description": "Not just treatment — a complete medical experience built on precision, safety, and genuine care for every case.",
+    "badgeTitle": "Internationally Certified",
+    "badgeSubtitle": "Global fellowships & standards",
+    "points": {
+      "academic": {
+        "title": "Outstanding Academic Experience",
+        "description": "A certified consultant with 18 years of experience and international fellowships in gastroenterology and hepatology."
+      },
+      "devices": {
+        "title": "The Latest Endoscopy Devices",
+        "description": "High-resolution imaging technology for precise diagnosis and safe, fast-recovery procedures."
+      },
+      "safety": {
+        "title": "Strict Safety Protocols",
+        "description": "International sterilization and sedation standards for your complete comfort and safety during every procedure."
+      },
+      "care": {
+        "title": "Complete Personal Care",
+        "description": "A treatment plan designed specifically for your case, with continuous follow-up until full recovery."
+      }
+    }
+  },
+  "guide": {
+    "eyebrow": "Your Complete Guide",
+    "title": "Patient Guide Before & After Endoscopy",
+    "description": "Everything you need to know to prepare for the procedure with confidence, and recover quickly and safely afterward.",
+    "beforeLabel": "Before the Endoscopy",
+    "afterLabel": "After the Endoscopy",
+    "before": {
+      "fasting": {
+        "title": "Fasting for 6–8 Hours",
+        "content": "It's best to fast for 6 to 8 hours before your appointment; a small amount of water is allowed up to two hours before the procedure."
+      },
+      "reports": {
+        "title": "Bring Your Reports & Test Results",
+        "content": "Please bring all previous scans, lab tests, and medical reports related to your case for review before the procedure."
+      },
+      "medications": {
+        "title": "Inform the Doctor of Your Current Medications",
+        "content": "Tell the doctor about all the medications you're taking, especially blood thinners, so doses can be adjusted if necessary."
+      }
+    },
+    "after": {
+      "rest": {
+        "title": "Rest for a Few Hours",
+        "content": "Rest is recommended for several hours after the procedure, and avoid driving if light sedation was used."
+      },
+      "diet": {
+        "title": "A Gradual, Light Diet",
+        "content": "Start with light fluids, then gradually return to normal food within 24 hours as instructed by the doctor."
+      },
+      "symptoms": {
+        "title": "Monitor Your Symptoms",
+        "content": "If you experience severe pain or bleeding, contact the clinic immediately for urgent advice."
+      }
+    }
+  },
+  "topVideos": {
+    "eyebrow": "Trusted Medical Content",
+    "title": "Top Videos",
+    "description": "Short, simple videos answering our patients' most common questions.",
+    "viewAll": "Watch All Videos",
+    "items": {
+      "gastroscopy101": { "title": "Everything You Need to Know About Gastroscopy" },
+      "refluxCauses": { "title": "Causes and Treatment of Acid Reflux" },
+      "colonoscopyTips": { "title": "Tips After a Colonoscopy" }
+    }
+  },
+  "reviews": {
+    "eyebrow": "Our Patients' Trust",
+    "title": "Patient Reviews",
+    "description": "Real experiences from patients who trusted us with their treatment journey.",
+    "readMore": "Read More Reviews",
+    "items": {
+      "ahmed": {
+        "name": "Ahmed El-Masry",
+        "text": "Refined care and highly accurate diagnosis — Dr. Mohamed Sami completely changed my perspective on endoscopy. A very comfortable experience from start to finish.",
+        "procedure": "Gastroscopy"
+      },
+      "sara": {
+        "name": "Sara Abdullah",
+        "text": "After years of struggling with IBS, I finally got an accurate diagnosis and a treatment plan that actually worked for me. Thank you, doctor.",
+        "procedure": "IBS Treatment"
+      },
+      "mahmoud": {
+        "name": "Mahmoud Ibrahim",
+        "text": "The best gastroenterology consultant I've dealt with — the medical team is professional and the clinic is equipped with the latest devices. Highly recommended.",
+        "procedure": "Liver Disease Follow-up"
+      },
+      "mona": {
+        "name": "Mona Fathy",
+        "text": "The doctor explains everything calmly and reassures you before any procedure. I felt completely safe during the therapeutic endoscopy.",
+        "procedure": "ERCP"
+      }
+    }
+  },
+  "finalCta": {
+    "title": "Your Health Deserves a Specialist Consultation",
+    "titleHighlight": "Book Your Appointment Today and Start Your Healing Journey",
+    "description": "Our medical team is ready to answer your questions and help you find the nearest suitable appointment.",
+    "contactUs": "Contact Us",
+    "whatsapp": "Chat on WhatsApp"
+  },
+  "footer": {
+    "quickLinks": "Quick Links",
+    "contactUs": "Contact Us",
+    "followUs": "Follow Us",
+    "rights": "All rights reserved"
+  },
+  "whatsapp": {
+    "aria": "Contact via WhatsApp",
+    "label": "Chat on WhatsApp",
+    "tooltip": "Contact via WhatsApp"
+  },
+  "callButton": {
+    "tooltip": "Call now"
+  },
+  "servicesPage": {
+    "metaTitle": "Our Medical Services",
+    "metaDescription": "All digestive, liver, and endoscopy diagnostic and treatment services in one place, under the supervision of Dr. Mohamed Sami.",
+    "hero": {
+      "titleLine1": "Comprehensive Medical Services",
+      "titleLine2": "For Your Digestive and Liver Health",
+      "subtitle": "From accurate diagnosis to the latest endoscopy techniques, everything you need for a safe and effective treatment journey under specialized medical supervision.",
+      "servicesBtn": "Our Services",
+      "contactBtn": "Contact Us"
+    },
+    "categories": {
+      "eyebrow": "Services Guide",
+      "title": "Find What You're Looking For",
+      "description": "Four main categories covering all your medical needs — tap any category to jump straight to its details.",
+      "items": {
+        "endoscopy": {
+          "title": "Digestive Endoscopy",
+          "description": "Diagnostic and therapeutic endoscopy using the latest high-resolution equipment."
+        },
+        "liver": {
+          "title": "Liver Diseases",
+          "description": "Comprehensive follow-up and treatment for all chronic and viral liver conditions."
+        },
+        "colon": {
+          "title": "Colon & Digestive Health",
+          "description": "Diagnosis and treatment of colon disorders and digestive pain."
+        },
+        "diagnostics": {
+          "title": "Screening & Early Diagnosis",
+          "description": "Regular screening programs to catch any problem before it develops."
+        }
+      }
+    },
+    "categoryDetails": {
+      "endoscopy": {
+        "title": "Digestive Endoscopy",
+        "description": "A complete overview of diagnostic and therapeutic endoscopy, and everything you need to know before and after the procedure.",
+        "items": {
+          "overview": {
+            "title": "Endoscopy Overview",
+            "description": "A safe, fast procedure to examine the digestive tract lining and diagnose problems with high accuracy."
+          },
+          "beforeCare": {
+            "title": "Before the Endoscopy",
+            "description": "Fasting for several hours, and informing the doctor of current medications and overall health status."
+          },
+          "afterCare": {
+            "title": "After the Endoscopy",
+            "description": "A short rest period, followed by a gradual, light diet as instructed by the doctor."
+          }
+        }
+      },
+      "liver": {
+        "title": "Liver Diseases",
+        "description": "Precise, ongoing follow-up for all liver conditions, from viral hepatitis to advanced cirrhosis.",
+        "items": {
+          "chronicCare": {
+            "title": "Chronic Hepatitis Follow-up",
+            "description": "Treatment plans for patients with hepatitis B and C using the latest global protocols."
+          },
+          "cirrhosis": {
+            "title": "Cirrhosis Management",
+            "description": "Regular follow-up and complication prevention for early and advanced liver cirrhosis."
+          },
+          "monitoring": {
+            "title": "Liver Function Monitoring",
+            "description": "Regular tests and imaging to assess liver function and catch any decline early."
+          }
+        }
+      },
+      "colon": {
+        "title": "Colon & Digestive Health",
+        "description": "Comprehensive solutions for colon disorders and chronic stomach pain.",
+        "items": {
+          "ibs": {
+            "title": "Irritable Bowel Syndrome",
+            "description": "Accurate diagnosis and a treatment plan that eases symptoms and improves your daily quality of life."
+          },
+          "polyps": {
+            "title": "Colon Polyps",
+            "description": "Detecting and removing polyps during endoscopy to prevent them from developing into tumors."
+          },
+          "nutrition": {
+            "title": "Specialized Nutrition Guidance",
+            "description": "A tailored diet plan that supports digestive health and reduces bloating and cramping."
+          }
+        }
+      },
+      "diagnostics": {
+        "title": "Screening & Early Diagnosis",
+        "description": "Comprehensive screening programs that help you catch any problem from the very first moment.",
+        "items": {
+          "earlyScreening": {
+            "title": "Early Cancer Screening",
+            "description": "Regular screening programs for groups most at risk of digestive tract tumors."
+          },
+          "labTests": {
+            "title": "Specialized Lab Tests",
+            "description": "Precise blood, liver, and kidney function tests to support an accurate diagnosis."
+          },
+          "imaging": {
+            "title": "Advanced Medical Imaging",
+            "description": "High-resolution X-rays and ultrasound for a comprehensive digestive system evaluation."
+          }
+        }
+      }
+    },
+    "endoscopyTypes": {
+      "eyebrow": "Specialized Services",
+      "title": "Types of Endoscopy",
+      "description": "Each type of endoscopy serves a different diagnostic or therapeutic purpose — learn the details and book your consultation.",
+      "applicationsLabel": "Applications",
+      "bookBtn": "Book a Consultation",
+      "items": {
+        "gastroscopy": {
+          "title": "Gastroscopy",
+          "applications": [
+            "Diagnosing ulcers and inflammation",
+            "Detecting acid reflux",
+            "Taking tissue samples for biopsy",
+            "Early detection of stomach tumors"
+          ]
+        },
+        "colonoscopy": {
+          "title": "Colonoscopy",
+          "applications": [
+            "Detecting colon polyps and tumors",
+            "Diagnosing ulcerative colitis and Crohn's disease",
+            "Following up on intestinal bleeding",
+            "Removing polyps in the same session"
+          ]
+        },
+        "ercp": {
+          "title": "ERCP (Bile Duct Endoscopy)",
+          "applications": [
+            "Removing bile duct stones",
+            "Treating bile duct obstruction",
+            "Placing bile duct stents",
+            "Diagnosing pancreatic conditions"
+          ]
+        },
+        "eus": {
+          "title": "Endoscopic Ultrasound (EUS)",
+          "applications": [
+            "Precise evaluation of digestive and pancreatic tumors",
+            "Fine-needle aspiration biopsies",
+            "Assessing tumor invasion depth",
+            "High-precision exam of the bile ducts and pancreas"
+          ]
+        }
+      }
+    },
+    "triggers": {
+      "eyebrow": "Warning Signs",
+      "title": "When Do You Need an Endoscopy?",
+      "description": "If you experience any of these symptoms persistently, don't delay seeing a doctor.",
+      "items": {
+        "chronicIndigestion": {
+          "title": "Chronic Indigestion",
+          "description": "A persistent feeling of heaviness or bloating after eating for an extended period."
+        },
+        "persistentPain": {
+          "title": "Persistent Stomach Pain",
+          "description": "Recurring stomach pain that doesn't respond to usual treatments."
+        },
+        "bleeding": {
+          "title": "Digestive Tract Bleeding",
+          "description": "Blood in the stool or vomit requires immediate medical attention."
+        },
+        "severeReflux": {
+          "title": "Severe Acid Reflux",
+          "description": "Recurring chest burning that affects your sleep and daily life."
+        }
+      }
+    },
+    "faq": {
+      "eyebrow": "FAQ",
+      "title": "Everything You Need to Know Before Booking",
+      "description": "Thorough answers to the most common questions our patients ask about endoscopies and consultations.",
+      "items": {
+        "isSafe": {
+          "question": "Is endoscopy a safe procedure?",
+          "answer": "Yes, endoscopy is one of the safest medical procedures when performed by a specialized doctor with modern equipment, with a very low complication rate."
+        },
+        "sedation": {
+          "question": "Is endoscopy painful, and will I be conscious during it?",
+          "answer": "The procedure is usually done under light sedation (conscious sedation), so you won't feel pain or discomfort, and you'll wake up within minutes of it ending."
+        },
+        "pain": {
+          "question": "Will I feel pain after the procedure?",
+          "answer": "You may feel mild bloating or a slight sore throat for a few hours, which is normal and resolves quickly without needing strong painkillers."
+        },
+        "recoveryTime": {
+          "question": "How many days will I need to fully recover?",
+          "answer": "You can usually return to your daily activities the same day or the next, and we only recommend avoiding driving for 24 hours after sedation."
+        },
+        "afterEffects": {
+          "question": "Are there any side effects after the endoscopy?",
+          "answer": "Some patients feel mild bloating or a slight change in their voice for a short while — temporary effects that disappear within hours."
+        },
+        "cost": {
+          "question": "Does the consultation and endoscopy cost include everything?",
+          "answer": "The cost is explained in full detail from the first consultation, covering the procedure, sedation, and follow-up, with no additional surprises."
+        },
+        "howToBook": {
+          "question": "How can I book an appointment?",
+          "answer": "You can easily book your appointment by calling directly or reaching out on WhatsApp, and our team will help you choose the nearest suitable time."
+        }
+      }
+    },
+    "cta": {
+      "title": "Ready to Take the First Step?",
+      "titleHighlight": "Book Your Medical Consultation Now",
+      "description": "Our medical team is ready to answer all your questions and help you determine the best service for your case.",
+      "contactUs": "Contact Us",
+      "whatsapp": "Chat on WhatsApp"
+    }
+  },
+  "videosPage": {
+    "metaTitle": "Videos & Medical Awareness",
+    "metaDescription": "A video library from Dr. Mohamed Sami explaining the symptoms, causes, and treatments of digestive and liver diseases and endoscopy.",
+    "hero": {
+      "titleLine1": "Trusted Medical Content",
+      "titleLine2": "That Gets You the Right Information",
+      "subtitle": "Short educational videos where Dr. Mohamed Sami explains the symptoms, causes, and treatments of digestive and liver diseases, so you can make informed health decisions.",
+      "servicesBtn": "Our Services",
+      "contactBtn": "Contact Us"
+    },
+    "gallery": {
+      "eyebrow": "Video Library",
+      "title": "Educational Videos That Answer Your Questions",
+      "description": "Pick the category you're interested in and watch short, simple videos from Dr. Mohamed Sami.",
+      "categories": {
+        "endoscopy": "Endoscopy",
+        "liver": "Liver Health",
+        "prevention": "Prevention Tips"
+      },
+      "playAria": "Play the video",
+      "closeAria": "Close",
+      "items": {
+        "gastroscopy101": {
+          "title": "Everything You Need to Know About Gastroscopy",
+          "description": "The procedure steps, when it's necessary, and how to prepare with confidence."
+        },
+        "colonoscopyTips": {
+          "title": "Tips After a Colonoscopy",
+          "description": "Practical guidance for a fast, safe recovery right after the procedure."
+        },
+        "ercpExplained": {
+          "title": "When Do You Need an ERCP?",
+          "description": "The cases that call for this advanced type of therapeutic endoscopy."
+        },
+        "hepatitisSigns": {
+          "title": "Early Signs of Viral Hepatitis",
+          "description": "Symptoms you shouldn't ignore so you can get diagnosed early."
+        },
+        "liverCirrhosisPrevention": {
+          "title": "How to Protect Your Liver From Cirrhosis",
+          "description": "Simple daily habits that keep your liver healthy long-term."
+        },
+        "fattyLiverTypes": {
+          "title": "Simple vs. Serious Fatty Liver — What's the Difference?",
+          "description": "How to tell a mild case apart from one that needs medical follow-up."
+        },
+        "refluxCauses": {
+          "title": "Causes and Treatment of Acid Reflux",
+          "description": "Why recurring heartburn happens, and how to avoid and treat it effectively."
+        },
+        "colonNutritionTips": {
+          "title": "Nutrition Tips for Colon Health",
+          "description": "Foods that support colon health and others best kept to a minimum."
+        },
+        "whenToSeeDoctor": {
+          "title": "Warning Signs That Need an Immediate GI Doctor Visit",
+          "description": "Warning symptoms you should never delay seeing a doctor for."
+        }
+      }
+    },
+    "cta": {
+      "title": "Want to Stay Informed?",
+      "titleHighlight": "Book Your Personal Consultation With Dr. Mohamed Sami",
+      "description": "Videos give you an idea, but an accurate diagnosis needs a direct consultation with the doctor.",
+      "contactUs": "Contact Us",
+      "whatsapp": "Chat on WhatsApp"
+    }
+  },
+  "reviewsPage": {
+    "metaTitle": "Patient Reviews & Testimonials",
+    "metaDescription": "Real experiences and verified reviews from Dr. Mohamed Sami's patients about their diagnosis, treatment, and endoscopy journey.",
+    "hero": {
+      "titleLine1": "Trusted by Thousands of Patients",
+      "titleLine2": "Before You Book Your Appointment",
+      "subtitle": "Real, verified stories from patients who went through their treatment journey with Dr. Mohamed Sami, from diagnosis to full recovery.",
+      "servicesBtn": "Our Services",
+      "contactBtn": "Contact Us"
+    },
+    "gallery": {
+      "eyebrow": "Patient Reviews & Experiences",
+      "title": "Real Stories. Real Trust.",
+      "description": "From the first consultation to full recovery, here are some of our patients' experiences in their own words.",
+      "verifiedBadge": "Verified Patient",
+      "doctorResponseLabel": "Doctor's Reply",
+      "items": {
+        "ahmedFull": {
+          "name": "Ahmed El-Masry",
+          "procedure": "Gastroscopy & Reflux Treatment",
+          "highlight": "From Daily Pain to a Normal Life",
+          "date": "2 months ago",
+          "text": "I suffered from acid reflux and daily heartburn for years, until I met Dr. Mohamed Sami. After an accurate diagnosis and a simple endoscopy, we found the real cause, and after treatment my life completely changed. I no longer feel the burning that used to keep me from sleeping or eating normally.",
+          "doctorResponse": "Glad the treatment gave you your normal life back, Ahmed — wishing you continued health."
+        },
+        "saraFull": {
+          "name": "Sara Abdullah",
+          "procedure": "IBS Treatment",
+          "highlight": "3 Years That Ended With the Right Diagnosis",
+          "date": "3 weeks ago",
+          "text": "I spent 3 years trying many treatments with no real result for my IBS. Dr. Mohamed Sami was the first person to truly listen to me and run the right tests without rushing. Now I can live my day normally without fear of a sudden flare-up.",
+          "doctorResponse": "Listening well is half the diagnosis, Sara — wishing you lasting health."
+        },
+        "mahmoud": {
+          "name": "Mahmoud Ibrahim",
+          "procedure": "Liver Disease Follow-up",
+          "date": "1 month ago",
+          "text": "The best gastroenterology consultant I've dealt with — the medical team is professional and the clinic is equipped with the latest devices. Highly recommended."
+        },
+        "mona": {
+          "name": "Mona Fathy",
+          "procedure": "ERCP",
+          "date": "5 days ago",
+          "text": "The doctor explains everything calmly and reassures you before any procedure. I felt completely safe during the therapeutic endoscopy."
+        },
+        "youssef": {
+          "name": "Youssef Adel",
+          "procedure": "Painless Endoscopy",
+          "date": "2 weeks ago",
+          "text": "I had a gastroscopy while very scared, but I genuinely felt nothing. The sedation was spot on and the team reassured me the whole time."
+        },
+        "heba": {
+          "name": "Heba El-Sherif",
+          "procedure": "Accurate Diagnosis",
+          "date": "10 days ago",
+          "text": "After going back and forth between several doctors, Dr. Sami reached the correct diagnosis on the first try, saving me a lot of time and exhaustion."
+        },
+        "amr": {
+          "name": "Amr Hassan",
+          "procedure": "Gastroscopy",
+          "date": "1 week ago",
+          "text": "A professional experience from start to finish. Thank you, Dr. Mohamed."
+        },
+        "nour": {
+          "name": "Nour El-Huda",
+          "procedure": "Colonoscopy",
+          "date": "4 days ago",
+          "text": "Precise diagnosis and fast results. I highly recommend him."
+        },
+        "khaled": {
+          "name": "Khaled Mansour",
+          "procedure": "Liver Disease Follow-up",
+          "date": "2 months ago",
+          "text": "Continuous follow-up and genuine care for my case. Very refined care."
+        }
+      }
+    },
+    "cta": {
+      "title": "Ready to Start Your Journey to Recovery?",
+      "titleHighlight": "Join Thousands of Patients Who Trust Dr. Mohamed Sami",
+      "description": "Our medical team is ready to answer your questions and help you find the nearest suitable appointment.",
+      "contactUs": "Contact Us",
+      "whatsapp": "Chat on WhatsApp"
+    }
+  },
+  "articlesPage": {
+    "metaTitle": "Medical Articles",
+    "metaDescription": "Trusted medical articles by Dr. Mohamed Sami on digestive and liver diseases and endoscopy, and the latest prevention and treatment methods.",
+    "hero": {
+      "titleLine1": "Trusted Medical Articles",
+      "titleLine2": "Straight From the Specialist",
+      "subtitle": "Carefully written content by Dr. Mohamed Sami explaining the causes, symptoms, and treatments of digestive and liver diseases in a simple, reliable way.",
+      "servicesBtn": "Our Services",
+      "contactBtn": "Contact Us"
+    },
+    "section": {
+      "eyebrow": "Article Library",
+      "title": "Read and Understand Your Condition Better",
+      "description": "Simple medical articles that help you understand your symptoms and make informed health decisions with confidence.",
+      "categories": {
+        "digestive": "Digestive Health",
+        "liver": "Liver Health",
+        "endoscopy": "Endoscopy"
+      },
+      "readTimeLabel": "min read",
+      "readMoreLabel": "Read More",
+      "closeAria": "Close",
+      "items": {
+        "completeGuide": {
+          "title": "The Complete Guide to Digestive Health: Warning Signs and Prevention Steps",
+          "excerpt": "Everything you need to know about maintaining digestive health, from early warning signs to the daily prevention habits recommended by the latest medical research.",
+          "content": "Digestive health is the foundation of your overall wellbeing, yet many of us ignore the early warning signs our body sends before they become a chronic problem.\n\nKey signs to watch for include persistent bloating after eating, a sudden change in bowel habits, feeling full too quickly, or recurring pain in the upper abdomen. If any of these persist for more than two weeks, it's time to see a specialist.\n\nOn the prevention side, modern medical research emphasizes the importance of dietary fiber, adequate hydration, and cutting back on processed foods and saturated fats. Even simple daily movement, like a 30-minute walk, noticeably improves bowel function.\n\nRegular screening matters, especially if you have a family history of digestive diseases or are over 40. Early diagnosis makes a huge difference in how easy treatment is and how likely a full recovery becomes."
+        },
+        "refluxVsHeartburn": {
+          "title": "The Difference Between Regular Heartburn and Chronic Acid Reflux",
+          "excerpt": "Not every heartburn after eating means acid reflux. Learn the differences and the signs that need medical follow-up.",
+          "content": "Many people use \"heartburn\" and \"reflux\" interchangeably, but there's an important difference worth understanding.\n\nOrdinary heartburn usually follows a heavy or spicy meal and fades on its own within an hour or two. Chronic acid reflux (GERD), on the other hand, is an ongoing condition where stomach acid repeatedly flows back into the esophagus, causing symptoms like chest burning, difficulty swallowing, and sometimes a chronic cough or hoarse voice.\n\nThe key distinction is frequency: chronic reflux happens more than twice a week and affects your daily quality of life. If your symptoms keep recurring, a simple gastroscopy can pinpoint the real cause and guide the right treatment."
+        },
+        "ibsCauses": {
+          "title": "IBS: The Real Causes and Modern Treatment Methods",
+          "excerpt": "A comprehensive look at the causes of irritable bowel syndrome and the latest treatment protocols that improve daily quality of life.",
+          "content": "IBS is one of the most frustrating conditions for patients, since its symptoms often come and go without an obvious trigger.\n\nThe real causes behind IBS are varied: stress and anxiety, sensitivity to certain foods, an imbalance in healthy gut bacteria, or heightened sensitivity of the intestines to normal post-meal stretching.\n\nModern treatment now takes an integrated approach: dietary adjustments (like a low-FODMAP diet), stress management through relaxation techniques, and sometimes probiotics to support gut health. Treatment is tailored to each case, since the underlying causes differ from person to person."
+        },
+        "fattyLiverGuide": {
+          "title": "Everything You Need to Know About Fatty Liver Before It Progresses",
+          "excerpt": "A simple guide to understanding what causes fat buildup in the liver, and when a mild case turns into a real concern.",
+          "content": "Fatty liver has become one of the most common conditions today, driven largely by unhealthy lifestyles and obesity.\n\nThere are two main types: simple fatty liver, which often has no clear symptoms and causes little harm if treated early, and inflammatory fatty liver (NASH), which can progress to liver fibrosis if ignored.\n\nSigns to watch for include persistent fatigue, mild pain in the upper right abdomen, and sometimes abnormal liver test results during a routine checkup.\n\nThe good news is that simple fatty liver often improves with dietary changes, gradual weight loss, and regular exercise. Regular follow-up with a liver specialist is important to prevent the condition from progressing."
+        },
+        "endoscopyPrep": {
+          "title": "Proper Preparation Steps for Gastroscopy and Colonoscopy",
+          "excerpt": "Practical guidance that ensures a safe, comfortable procedure, from fasting to the day of the procedure itself.",
+          "content": "Proper preparation for an endoscopy ensures a safe procedure and accurate results, while minimizing the risk of complications.\n\nFor 6–8 hours before the procedure, you should fast completely, with only small sips of water allowed up to two hours beforehand. If you take blood thinners, tell your doctor in advance so they can advise on stopping or adjusting the dose.\n\nOn the day of the procedure, it's best to bring someone who can drive you home afterward, especially if light sedation will be used. Wear comfortable clothing and leave jewelry or metal items at home.\n\nRight after the procedure, you'll need a short rest period until the sedation wears off, after which you can gently return to your normal activities."
+        },
+        "postEndoscopyNutrition": {
+          "title": "Proper Nutrition After Endoscopic Procedures",
+          "excerpt": "A gradual diet plan that helps you recover quickly and safely after any endoscopic procedure.",
+          "content": "Proper nutrition after any endoscopic procedure plays a big role in how quickly you recover and how comfortable you feel.\n\nFor the first couple of hours afterward, stick to clear liquids like water and light tea. After that, gradually move to soft foods like soup, yogurt, and bananas, avoiding spicy or fatty foods for at least a day.\n\nIf a biopsy was taken during the procedure, your doctor may recommend a specific diet until results come back. Most importantly, listen to your body — if you notice anything unusual like severe pain or bleeding, contact the clinic immediately."
+        },
+        "liverFunctionTests": {
+          "title": "When Is a Liver Function Test Necessary?",
+          "excerpt": "The signs and conditions that call for an immediate liver function test, and how to correctly read the results.",
+          "content": "A liver function test is a simple diagnostic tool that reveals a great deal about your overall liver health.\n\nSituations that call for an immediate test include unexplained fatigue lasting a long time, yellowing of the skin or eyes, pain in the upper right abdomen, or having risk factors like obesity or a family history of liver disease.\n\nResults typically include markers like ALT and AST enzymes and bilirubin levels. A slight elevation can be temporary and harmless, but a sustained or significant rise needs careful evaluation by a specialist to determine the real cause and appropriate treatment."
+        }
+      }
+    },
+    "cta": {
+      "title": "Read the Article — Still Have a Question?",
+      "titleHighlight": "Book Your Consultation With Dr. Mohamed Sami",
+      "description": "Articles give you the picture, but diagnosing your case needs a direct consultation with the doctor.",
+      "contactUs": "Contact Us",
+      "whatsapp": "Chat on WhatsApp"
+    }
+  },
+  "contactPage": {
+    "metaTitle": "Contact Us",
+    "metaDescription": "Get in touch with Dr. Mohamed Sami and book your consultation directly, or find the clinic location and contact numbers.",
+    "hero": {
+      "titleLine1": "Contact Us",
+      "titleLine2": "We're Here to Help",
+      "subtitle": "Book your consultation in minutes, or reach out to us directly with any questions about your health.",
+      "servicesBtn": "Our Services",
+      "contactBtn": "Contact Us"
+    },
+    "form": {
+      "eyebrow": "Book Your Consultation",
+      "title": "Fill In Your Details and We'll Reach Out",
+      "description": "Just a few details, and our team will contact you to confirm the nearest suitable appointment.",
+      "nameLabel": "Full Name",
+      "namePlaceholder": "Enter your full name",
+      "phoneLabel": "Phone / WhatsApp Number",
+      "phonePlaceholder": "e.g. 01xxxxxxxxx",
+      "serviceLabel": "Consultation Type",
+      "servicePlaceholder": "Select consultation type",
+      "serviceOptions": {
+        "general": "General Consultation",
+        "endoscopy": "Gastroscopy or Colonoscopy",
+        "liver": "Liver Disease Follow-up",
+        "other": "Other"
+      },
+      "dateLabel": "Preferred Date",
+      "notesLabel": "Additional Details or Symptoms",
+      "notesPlaceholder": "Share any details that help us understand your case better (optional)",
+      "submitBtn": "Send via WhatsApp",
+      "messageTitle": "New Consultation Booking Request",
+      "notSpecified": "Not specified",
+      "noNotes": "None"
+    },
+    "info": {
+      "eyebrow": "Contact Information",
+      "title": "Reach Us Easily",
+      "description": "By phone, WhatsApp, or by visiting the clinic directly.",
+      "phoneLabel": "Call Us",
+      "whatsappLabel": "Chat on WhatsApp",
+      "emailLabel": "Email",
+      "addressLabel": "Clinic Address",
+      "followUsLabel": "Follow Us"
+    },
+    "cta": {
+      "title": "Still Not Sure?",
+      "titleHighlight": "Talk to Us Now and We'll Help You Decide",
+      "description": "Our medical team is ready to answer all your questions, anytime.",
+      "contactUs": "Contact Us",
+      "whatsapp": "Chat on WhatsApp"
+    }
+  },
+  "aboutPage": {
+    "metaTitle": "About the Doctor",
+    "metaDescription": "Meet Dr. Mohamed Sami, Consultant of Gastroenterology, Hepatology & Endoscopy — his academic journey, clinical experience, and approach to diagnosis and care.",
+    "hero": {
+      "titleLine1": "Dr. Mohamed Sami",
+      "titleLine2": "Experience That Speaks, Care That Reassures",
+      "subtitle": "Over 18 years diagnosing and treating digestive and liver diseases, combining scientific precision with genuine, compassionate care for every patient.",
+      "servicesBtn": "Our Services",
+      "contactBtn": "Contact Us"
+    },
+    "bio": {
+      "eyebrow": "About the Doctor",
+      "title": "A Journey From a Passion for Diagnosis to Caring for Thousands of Patients",
+      "paragraph1": "My career began with a genuine passion for understanding the human body and digestive and liver diseases, and has spanned more than 18 years — years that taught me the most important diagnostic tool is truly listening to the patient before any test or scan.",
+      "paragraph2": "Throughout my career, I have performed more than 10,000 successful endoscopies and followed thousands of chronic liver and digestive cases. Every case has reinforced that accurate diagnosis and consistent follow-up are the true foundation of recovery.",
+      "paragraph3": "My philosophy is simple: every patient gets their full time, an accurate diagnosis built on the latest global protocols, and a treatment plan tailored specifically to their case — never a one-size-fits-all solution."
+    },
+    "video": {
+      "eyebrow": "A Personal Introduction",
+      "title": "Get to Know Dr. Mohamed Sami",
+      "description": "A short introductory video where Dr. Mohamed Sami shares his journey and his approach to patient care.",
+      "playAria": "Play the introductory video",
+      "closeAria": "Close"
+    },
+    "academic": {
+      "eyebrow": "Academic Journey",
+      "title": "An Academic Path Built Step by Step",
+      "description": "From the first day of medical school to the latest international fellowships, every stage added to his scientific and practical experience.",
+      "items": {
+        "bachelor": {
+          "title": "Bachelor of Medicine and Surgery",
+          "description": "Faculty of Medicine, Cairo University — graduated with honors."
+        },
+        "masters": {
+          "title": "Master's Degree in Internal Medicine",
+          "description": "Advanced studies in diagnosing and treating general internal medicine conditions."
+        },
+        "phd": {
+          "title": "PhD in Gastroenterology & Hepatology",
+          "description": "A doctoral thesis specialized in the latest protocols for treating chronic liver disease."
+        },
+        "fellowship": {
+          "title": "European Fellowship in Advanced Interventional Endoscopy",
+          "description": "Specialized training in the latest therapeutic endoscopy techniques at leading European centers."
+        },
+        "conferences": {
+          "title": "Scientific Committee Member at International Conferences",
+          "description": "Active participation as a speaker and scientific committee member at international gastroenterology conferences."
+        }
+      }
+    },
+    "expertise": {
+      "eyebrow": "Areas of Expertise",
+      "title": "Areas of Expertise & Specialization",
+      "description": "In-depth expertise across the key branches of gastroenterology and hepatology, using the latest diagnostic and treatment methods.",
+      "items": {
+        "diagnostics": {
+          "title": "Digestive Disease Diagnostics",
+          "description": "Accurate diagnosis of the causes of stomach and colon pain and chronic bloating."
+        },
+        "liver": {
+          "title": "Chronic Liver Disease Treatment",
+          "description": "Follow-up and treatment for patients with hepatitis and liver cirrhosis using the latest protocols."
+        },
+        "endoscopy": {
+          "title": "Diagnostic & Therapeutic Endoscopy",
+          "description": "Performing diagnostic and therapeutic gastroscopy and colonoscopy with complete safety."
+        },
+        "earlyDetection": {
+          "title": "Early Tumor Detection",
+          "description": "Regular screening programs for the early detection of digestive tract tumors and polyps."
+        }
+      },
+      "cta": "Explore Our Medical Services"
+    },
+    "career": {
+      "eyebrow": "Career Progression",
+      "title": "Where We Started, Where We Are Now",
+      "description": "A gradual career path built across major hospitals and specialized medical centers.",
+      "items": {
+        "houseOfficer": {
+          "title": "House Officer",
+          "place": "Cairo University Hospitals",
+          "description": "The start of his clinical career, with intensive training across all specialties."
+        },
+        "resident": {
+          "title": "Resident in Internal Medicine",
+          "place": "Kasr Al Ainy Hospital",
+          "description": "In-depth experience diagnosing and treating complex internal medicine cases."
+        },
+        "specialist": {
+          "title": "Gastroenterology & Hepatology Specialist",
+          "place": "A specialized digestive diseases center",
+          "description": "Full specialization in gastroenterology, hepatology, and endoscopy."
+        },
+        "unitHead": {
+          "title": "Head of the Endoscopy Unit",
+          "place": "A major private hospital in Cairo",
+          "description": "Leading a complete medical team and developing the unit's endoscopy protocols."
+        },
+        "consultant": {
+          "title": "Consultant of Gastroenterology, Hepatology & Endoscopy",
+          "place": "Dr. Mohamed Sami's Private Clinic",
+          "description": "Providing comprehensive medical care to thousands of patients at his private clinic."
+        }
+      }
+    },
+    "specializations": {
+      "eyebrow": "Core Specializations",
+      "title": "Core Specializations in Digestive Health",
+      "description": "A special focus on four key pillars that form the core of his daily clinical practice.",
+      "items": {
+        "cancerDetection": {
+          "title": "Early Cancer Detection",
+          "description": "Advanced screening programs for the early detection and treatment of digestive tract tumors."
+        },
+        "advancedEndoscopy": {
+          "title": "Advanced Endoscopy",
+          "description": "Precise interventional endoscopy procedures using the latest high-resolution equipment."
+        },
+        "liverDiseases": {
+          "title": "Liver Diseases",
+          "description": "Comprehensive follow-up for patients with chronic liver disease, hepatitis, and cirrhosis."
+        },
+        "ibd": {
+          "title": "Inflammatory Bowel Disease",
+          "description": "Diagnosis and long-term treatment for ulcerative colitis and Crohn's disease."
+        }
+      }
+    },
+    "philosophy": {
+      "eyebrow": "Approach to Care",
+      "title": "His Approach to Diagnosis and Treatment",
+      "description": "A medical philosophy built on humanity first, backed by the latest advances in modern medicine.",
+      "items": {
+        "patientFirst": {
+          "title": "Patient First",
+          "description": "Enough time for every patient, and genuine listening to their symptoms and concerns before any medical decision."
+        },
+        "modernTech": {
+          "title": "Modern Diagnostic Technology",
+          "description": "Using the latest endoscopy and high-resolution imaging equipment for faster, more accurate diagnosis."
+        },
+        "personalizedCare": {
+          "title": "Personalized Treatment Plans",
+          "description": "Every treatment plan is designed specifically for the patient's case, never a generic, repeated prescription."
+        },
+        "followUp": {
+          "title": "Continuous Follow-up",
+          "description": "Regular follow-up after every procedure to ensure stability and complete recovery."
+        }
+      }
+    },
+    "message": {
+      "eyebrow": "A Personal Message",
+      "title": "A Message From Dr. Mohamed Sami",
+      "quote": "Every patient who walks into my clinic is a trust before they are a medical case. My mission is to give them my full time, an accurate diagnosis, and a treatment plan built specifically for them — so they feel safe from the very first moment until they are fully recovered.",
+      "signatureName": "Dr. Mohamed Sami",
+      "signatureTitle": "Consultant of Gastroenterology, Hepatology & Endoscopy"
+    },
+    "stats": {
+      "eyebrow": "By the Numbers",
+      "title": "Achievements That Speak for Themselves",
+      "description": "Real numbers summarizing a career built on trust and the highest standards of medical care."
+    },
+    "cta": {
+      "title": "Ready to Start Your Journey to Recovery?",
+      "titleHighlight": "Book Your Consultation With Dr. Mohamed Sami",
+      "description": "Our medical team is ready to answer your questions and help you find the nearest suitable appointment.",
+      "contactUs": "Contact Us",
+      "whatsapp": "Chat on WhatsApp"
+    }
+  }
+}
