@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { AmbientBackground } from "@/components/ui/AmbientBackground";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { DoctorFrame } from "@/components/ui/DoctorFrame";
 
@@ -10,6 +11,7 @@ export function BioSection() {
 
   return (
     <section className="relative py-20 sm:py-28">
+      <AmbientBackground />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
           <motion.div

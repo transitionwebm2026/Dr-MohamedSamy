@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { ArrowLeft } from "lucide-react";
+import { AmbientBackground } from "@/components/ui/AmbientBackground";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
@@ -14,7 +15,7 @@ export function EndoscopyUnit() {
 
   return (
     <section className="relative py-20 sm:py-28">
-      <div className="pointer-events-none absolute inset-x-0 top-1/2 -z-10 h-96 -translate-y-1/2 bg-brand-primary/10 blur-3xl" />
+      <AmbientBackground />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
 

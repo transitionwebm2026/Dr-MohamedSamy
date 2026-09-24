@@ -24,6 +24,7 @@ type MediaImageProps = {
   icon: LucideIcon;
   ratio?: "video" | "square" | "portrait";
   className?: string;
+  iconClassName?: string;
 };
 
 const ratioClasses: Record<NonNullable<MediaImageProps["ratio"]>, string> = {
@@ -32,10 +33,11 @@ const ratioClasses: Record<NonNullable<MediaImageProps["ratio"]>, string> = {
   portrait: "aspect-[9/16]",
 };
 
-export function MediaImage({ src, alt, icon, ratio = "video", className }: MediaImageProps) {
+export function MediaImage({ src, alt, icon, ratio = "video", className, iconClassName }: MediaImageProps) {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    if (!src) return;
     let cancelled = false;
     const probe = new window.Image();
     probe.onload = () => {
@@ -50,8 +52,8 @@ export function MediaImage({ src, alt, icon, ratio = "video", className }: Media
     };
   }, [src]);
 
-  if (!loaded) {
-    return <MediaPlaceholder icon={icon} ratio={ratio} className={className} />;
+  if (!loaded || !src) {
+    return <MediaPlaceholder icon={icon} ratio={ratio} className={className} iconClassName={iconClassName} />;
   }
 
   return (

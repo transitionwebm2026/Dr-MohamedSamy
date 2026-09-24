@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { Award, GraduationCap, Play, Stethoscope, X } from "lucide-react";
+import { Award, GraduationCap, Play, Stethoscope } from "lucide-react";
+import { AmbientBackground } from "@/components/ui/AmbientBackground";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { MediaImage } from "@/components/ui/MediaImage";
+import { VideoModal } from "@/components/ui/VideoModal";
 
 const qualifications = [
   { key: "phd", icon: GraduationCap },
@@ -13,12 +15,15 @@ const qualifications = [
   { key: "member", icon: Stethoscope },
 ];
 
-export function AboutDoctor() {
+export function AboutDoctor({ content }: { content?: Record<string, unknown> }) {
   const [open, setOpen] = useState(false);
   const t = useTranslations("about");
+  const thumbnailUrl = typeof content?.thumbnailUrl === "string" ? content.thumbnailUrl : "";
+  const videoUrl = typeof content?.videoUrl === "string" ? content.videoUrl : "";
 
   return (
     <section id="about" className="relative py-20 sm:py-28">
+      <AmbientBackground />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
           <motion.div
@@ -35,7 +40,7 @@ export function AboutDoctor() {
             >
               <div className="glow-border glass-strong w-full rounded-3xl p-2">
                 {/* aspect-video (16:9) is intentional — keep this ratio regardless of column height */}
-                <MediaPlaceholder icon={Stethoscope} ratio="video" className="w-full rounded-2xl" />
+                <MediaImage src={thumbnailUrl} alt={t("title")} icon={Stethoscope} ratio="video" className="w-full rounded-2xl" />
               </div>
               <span className="glass-strong absolute left-1/2 top-1/2 flex size-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full text-white transition-transform duration-300 group-hover:scale-110 sm:size-16">
                 <Play className="size-6 fill-current sm:size-7" />
@@ -74,35 +79,7 @@ export function AboutDoctor() {
         </div>
       </div>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setOpen(false)}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-brand-surface/90 p-4 backdrop-blur-md"
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              onClick={(e) => e.stopPropagation()}
-              className="glass-strong relative w-full max-w-3xl rounded-3xl p-3"
-            >
-              <button
-                onClick={() => setOpen(false)}
-                className="glass absolute -top-4 -end-4 flex size-10 items-center justify-center rounded-full text-brand-ink"
-                aria-label={t("closeAria")}
-              >
-                <X className="size-5" />
-              </button>
-              <MediaPlaceholder icon={Play} ratio="video" className="rounded-2xl" iconClassName="size-14" />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <VideoModal open={open} videoUrl={videoUrl} title={t("title")} onClose={() => setOpen(false)} closeLabel={t("closeAria")} />
     </section>
   );
 }

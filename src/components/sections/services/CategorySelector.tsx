@@ -1,12 +1,15 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { AmbientBackground } from "@/components/ui/AmbientBackground";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { MediaImage } from "@/components/ui/MediaImage";
 import { serviceCategories } from "@/lib/data";
+import { findItem } from "@/lib/cms/helpers";
+import type { DynamicItem } from "@/lib/supabase/types";
 
-export function CategorySelector() {
+export function CategorySelector({ items = [] }: { items?: DynamicItem[] }) {
   const t = useTranslations("servicesPage.categories");
 
   const scrollToAnchor = (anchor: string) => {
@@ -15,6 +18,7 @@ export function CategorySelector() {
 
   return (
     <section id="categories" className="relative scroll-mt-28 py-20 sm:py-28">
+      <AmbientBackground />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
 
@@ -38,7 +42,7 @@ export function CategorySelector() {
               className="cursor-pointer text-start"
             >
               <MediaImage
-                src={`/images/services/${category.key}.jpg`}
+                src={findItem(items, category.key)?.image_url || `/images/services/${category.key}.jpg`}
                 alt={t(`items.${category.key}.title`)}
                 icon={category.icon}
                 ratio="video"

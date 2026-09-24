@@ -1,23 +1,30 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { AmbientBackground } from "@/components/ui/AmbientBackground";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { StatCounter } from "@/components/ui/StatCounter";
 import { stats } from "@/lib/data";
+import { extraNumber, extraString, findItem } from "@/lib/cms/helpers";
+import type { DynamicItem } from "@/lib/supabase/types";
 
-export function AchievementsStats() {
+export function AchievementsStats({ items = [] }: { items?: DynamicItem[] }) {
   const t = useTranslations("aboutPage.stats");
   const tStats = useTranslations("stats");
 
   return (
     <section className="relative py-20 sm:py-28">
+      <AmbientBackground />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
 
         <div className="mt-14 grid grid-cols-2 gap-5 lg:grid-cols-4">
           {stats.map((stat, i) => {
             const Icon = stat.icon;
+            const dbItem = findItem(items, stat.key);
+            const value = extraNumber(dbItem, "value", stat.value);
+            const suffix = extraString(dbItem, "suffix", stat.suffix);
             return (
               <GlassCard
                 key={stat.key}
@@ -33,7 +40,7 @@ export function AchievementsStats() {
                   <Icon className="size-6" />
                 </span>
                 <p className="gradient-brand-text text-3xl font-extrabold sm:text-4xl">
-                  <StatCounter value={stat.value} suffix={stat.suffix} />
+                  <StatCounter value={value} suffix={suffix} />
                 </p>
                 <p className="text-xs font-semibold text-brand-ink-muted sm:text-sm">{tStats(stat.key)}</p>
               </GlassCard>

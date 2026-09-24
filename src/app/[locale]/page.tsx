@@ -11,6 +11,7 @@ import { PatientGuide } from "@/components/sections/PatientGuide";
 import { TopVideos } from "@/components/sections/TopVideos";
 import { Reviews } from "@/components/sections/Reviews";
 import { FinalCTA } from "@/components/sections/FinalCTA";
+import { getPageSections } from "@/lib/cms/queries";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -18,18 +19,21 @@ export default async function Home({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
+  const sections = await getPageSections("home");
+  const byKey = new Map(sections.map((s) => [s.section_key, s]));
+
   return (
     <>
       <Hero />
-      <Stats />
+      <Stats items={byKey.get("stats")?.items ?? []} />
       <SymptomChecker />
-      <AboutDoctor />
+      <AboutDoctor content={byKey.get("about_doctor")?.content} />
       <Treatments />
       <EndoscopyUnit />
       <PatientJourney />
       <WhyChooseUs />
       <PatientGuide />
-      <TopVideos />
+      <TopVideos items={byKey.get("top_videos")?.items ?? []} />
       <Reviews />
       <FinalCTA />
     </>

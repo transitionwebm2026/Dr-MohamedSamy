@@ -33,7 +33,7 @@ export function DoctorFrame({ className, ratio = "portrait" }: DoctorFrameProps)
         <div
           className={cn(
             ratioClasses[ratio],
-            "relative w-full overflow-hidden rounded-[2rem] bg-gradient-to-br from-brand-primary/40 via-brand-dark/60 to-brand-rose/30",
+            "gradient-brand relative w-full overflow-hidden rounded-[2rem]",
           )}
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.18),transparent_55%)]" />

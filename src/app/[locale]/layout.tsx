@@ -11,6 +11,8 @@ import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { CallButton } from "@/components/layout/CallButton";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
+import { SiteSettingsProvider } from "@/components/layout/SiteSettingsProvider";
+import { getLayoutData } from "@/lib/cms/layout";
 import { siteConfig } from "@/lib/site-config";
 
 // "DG Tebian" is not available as a web font; Tajawal is used as the
@@ -100,6 +102,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   const t = await getTranslations({ locale, namespace: "site" });
   const dir = locale === "ar" ? "rtl" : "ltr";
+  const { settings, navbar, footer } = await getLayoutData(locale);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -109,14 +112,14 @@ export default async function LocaleLayout({ children, params }: Props) {
     medicalSpecialty: ["Gastroenterology", "Hepatology", "Endoscopy"],
     description: t("description"),
     url: siteConfig.url,
-    telephone: siteConfig.phone,
-    email: siteConfig.email,
+    telephone: settings.phone,
+    email: settings.email,
     address: {
       "@type": "PostalAddress",
       streetAddress: t("address"),
       addressCountry: "EG",
     },
-    sameAs: siteConfig.socials.map((s) => s.href),
+    sameAs: settings.socials.map((s) => s.href),
   };
 
   return (
@@ -135,14 +138,16 @@ export default async function LocaleLayout({ children, params }: Props) {
         className={`flex min-h-full flex-col overflow-x-hidden ${locale === "ar" ? "font-tajawal" : "font-montserrat"}`}
       >
         <NextIntlClientProvider>
-          <ScrollToTop />
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <div className="fixed bottom-6 left-6 z-40 flex flex-col items-center gap-3">
-            <WhatsAppButton />
-            <CallButton />
-          </div>
+          <SiteSettingsProvider value={settings}>
+            <ScrollToTop />
+            <Navbar data={navbar} />
+            <main className="flex-1">{children}</main>
+            <Footer data={footer} settings={settings} />
+            <div className="fixed bottom-4 left-4 z-40 flex flex-col items-center gap-2.5 sm:bottom-6 sm:left-6 sm:gap-3">
+              <WhatsAppButton />
+              <CallButton />
+            </div>
+          </SiteSettingsProvider>
         </NextIntlClientProvider>
       </body>
     </html>

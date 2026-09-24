@@ -3,17 +3,21 @@
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { ArrowLeft } from "lucide-react";
+import { AmbientBackground } from "@/components/ui/AmbientBackground";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { MediaImage } from "@/components/ui/MediaImage";
 import { LiquidButton } from "@/components/ui/LiquidButton";
 import { expertiseAreas } from "@/lib/data";
+import { findItem } from "@/lib/cms/helpers";
+import type { DynamicItem } from "@/lib/supabase/types";
 
-export function ExpertiseAreas() {
+export function ExpertiseAreas({ items = [] }: { items?: DynamicItem[] }) {
   const t = useTranslations("aboutPage.expertise");
 
   return (
     <section className="relative py-20 sm:py-28">
+      <AmbientBackground />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
 
@@ -29,7 +33,7 @@ export function ExpertiseAreas() {
               className="flex flex-col items-start"
             >
               <MediaImage
-                src={`/images/about/${item.key}.jpg`}
+                src={findItem(items, item.key)?.image_url || `/images/about/${item.key}.jpg`}
                 alt={t(`items.${item.key}.title`)}
                 icon={item.icon}
                 ratio="video"

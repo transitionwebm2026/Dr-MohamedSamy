@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { BadgeCheck, Quote, Star } from "lucide-react";
+import { AmbientBackground } from "@/components/ui/AmbientBackground";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { TiltCard } from "@/components/sections/reviews/TiltCard";
 import { patientReviews } from "@/lib/data";
@@ -30,6 +31,7 @@ export function ReviewsBentoGrid() {
 
   return (
     <section id="reviews" className="relative scroll-mt-28 py-20 sm:py-28">
+      <AmbientBackground />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
 

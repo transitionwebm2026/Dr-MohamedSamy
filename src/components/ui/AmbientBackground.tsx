@@ -8,31 +8,27 @@ type AmbientBackgroundProps = {
   className?: string;
 };
 
+/**
+ * The backdrop every section sits on: the flat dark page color plus a soft
+ * purple glow at the very top of the section — strongest in the top-right
+ * corner, fading out downward — so each section "starts" with it and nothing
+ * else tints the rest of the page.
+ */
 export function AmbientBackground({ variant = "section", className }: AmbientBackgroundProps) {
-  const size = variant === "hero" ? "size-[38rem]" : "size-96";
+  const h = variant === "hero" ? 560 : 420;
 
   return (
     <div className={cn("pointer-events-none absolute inset-0 -z-10 overflow-hidden", className)}>
-      <motion.div
-        animate={{ x: [0, 40, -20, 0], y: [0, -30, 20, 0] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-        className={cn(
-          size,
-          "absolute -top-32 -right-24 rounded-full bg-brand-primary/30 blur-[110px]",
-        )}
-      />
-      <motion.div
-        animate={{ x: [0, -30, 20, 0], y: [0, 20, -30, 0] }}
-        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
-        className={cn(
-          size,
-          "absolute -bottom-32 -left-24 rounded-full bg-brand-rose/25 blur-[110px]",
-        )}
-      />
-      <motion.div
-        animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.8, 0.5] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute left-1/2 top-1/3 size-72 -translate-x-1/2 rounded-full bg-brand-dark/40 blur-[100px]"
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: [
+            `radial-gradient(45% ${h}px at 100% 0%, rgba(225, 148, 159, 0.19), transparent)`,
+            `radial-gradient(60% ${h}px at 100% 0%, rgba(169, 127, 201, 0.09), transparent)`,
+            `radial-gradient(45% ${h}px at 0% 0%, rgba(110, 75, 152, 0.14), transparent)`,
+            `linear-gradient(to bottom, rgba(110, 75, 152, 0.13), transparent ${h}px)`,
+          ].join(", "),
+        }}
       />
 
       {/* subtle floating particles */}
@@ -50,8 +46,6 @@ export function AmbientBackground({ variant = "section", className }: AmbientBac
           }}
         />
       ))}
-
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,var(--color-brand-surface)_92%)]" />
     </div>
   );
 }

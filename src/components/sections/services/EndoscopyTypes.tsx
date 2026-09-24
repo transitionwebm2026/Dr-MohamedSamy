@@ -2,17 +2,21 @@
 
 import { useTranslations } from "next-intl";
 import { Check, PhoneCall } from "lucide-react";
+import { AmbientBackground } from "@/components/ui/AmbientBackground";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { MediaImage } from "@/components/ui/MediaImage";
 import { LiquidButton } from "@/components/ui/LiquidButton";
 import { endoscopyTypes } from "@/lib/data";
+import { findItem } from "@/lib/cms/helpers";
+import type { DynamicItem } from "@/lib/supabase/types";
 
-export function EndoscopyTypes() {
+export function EndoscopyTypes({ items = [] }: { items?: DynamicItem[] }) {
   const t = useTranslations("servicesPage.endoscopyTypes");
 
   return (
     <section className="relative py-20 sm:py-28">
+      <AmbientBackground />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
 
@@ -30,7 +34,7 @@ export function EndoscopyTypes() {
                 className="flex flex-col p-5 sm:p-7"
               >
                 <MediaImage
-                  src={`/images/services/${item.key}.jpg`}
+                  src={findItem(items, item.key)?.image_url || `/images/services/${item.key}.jpg`}
                   alt={t(`items.${item.key}.title`)}
                   icon={item.icon}
                   ratio="video"

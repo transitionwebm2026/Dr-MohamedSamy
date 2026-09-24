@@ -29,11 +29,7 @@ export function MediaPlaceholder({
 }: MediaPlaceholderProps) {
   return (
     <div
-      className={cn(
-        ratioClasses[ratio],
-        "relative w-full overflow-hidden rounded-2xl bg-[linear-gradient(135deg,rgba(110,75,152,0.45)_0%,rgba(41,11,76,0.7)_55%,rgba(169,127,201,0.35)_80%,rgba(225,148,159,0.25)_100%)]",
-        className,
-      )}
+      className={cn(ratioClasses[ratio], "gradient-brand relative w-full overflow-hidden rounded-2xl", className)}
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_15%,rgba(225,190,255,0.22),transparent_55%)]" />
       <div className="flex h-full w-full items-center justify-center">

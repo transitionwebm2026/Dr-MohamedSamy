@@ -1,17 +1,29 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { AmbientBackground } from "@/components/ui/AmbientBackground";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { MediaImage } from "@/components/ui/MediaImage";
 import { categoryDetailItems, serviceCategories } from "@/lib/data";
+import { findItem } from "@/lib/cms/helpers";
+import type { DynamicItem } from "@/lib/supabase/types";
 
-export function CategoryDetails({ categoryKey, anchor }: { categoryKey: string; anchor: string }) {
+export function CategoryDetails({
+  categoryKey,
+  anchor,
+  items: dbItems = [],
+}: {
+  categoryKey: string;
+  anchor: string;
+  items?: DynamicItem[];
+}) {
   const t = useTranslations(`servicesPage.categoryDetails.${categoryKey}`);
   const items = categoryDetailItems[categoryKey] ?? [];
   const category = serviceCategories.find((c) => c.key === categoryKey);
 
   return (
     <section id={anchor} className="relative scroll-mt-28 py-20 sm:py-28">
+      <AmbientBackground />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           {category && (
@@ -38,7 +50,7 @@ export function CategoryDetails({ categoryKey, anchor }: { categoryKey: string; 
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
               <MediaImage
-                src={`/images/services/${item.key}.jpg`}
+                src={findItem(dbItems, item.key)?.image_url || `/images/services/${item.key}.jpg`}
                 alt={t(`items.${item.key}.title`)}
                 icon={item.icon}
                 ratio="video"

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { AmbientBackground } from "@/components/ui/AmbientBackground";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { academicTrack } from "@/lib/data";
@@ -11,6 +12,7 @@ export function AcademicTimeline() {
 
   return (
     <section className="relative py-20 sm:py-28">
+      <AmbientBackground />
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <SectionHeader eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
 

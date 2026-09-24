@@ -3,20 +3,15 @@
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { FaFacebookF, FaInstagram, FaTiktok, FaWhatsapp } from "react-icons/fa6";
-import { type IconType } from "react-icons";
+import { FaWhatsapp } from "react-icons/fa6";
 import { GlassCard } from "@/components/ui/GlassCard";
-import { siteConfig } from "@/lib/site-config";
-
-const socialIcons: Record<string, IconType> = {
-  Facebook: FaFacebookF,
-  Instagram: FaInstagram,
-  TikTok: FaTiktok,
-};
+import { useSiteSettings } from "@/components/layout/SiteSettingsProvider";
+import { socialIcon } from "@/components/ui/socialIcons";
 
 export function ContactInfo() {
   const t = useTranslations("contactPage.info");
   const tSite = useTranslations("site");
+  const settings = useSiteSettings();
   const address = tSite("address");
 
   return (
@@ -29,7 +24,7 @@ export function ContactInfo() {
     >
       <GlassCard hover={false} className="space-y-4 p-5 sm:p-6">
         <a
-          href={`tel:${siteConfig.phone}`}
+          href={`tel:${settings.phone}`}
           className="flex items-center gap-3 rounded-2xl p-2 transition-colors hover:bg-white/5"
         >
           <span className="gradient-brand flex size-11 shrink-0 items-center justify-center rounded-xl">
@@ -38,13 +33,13 @@ export function ContactInfo() {
           <div>
             <p className="text-xs text-brand-ink-muted">{t("phoneLabel")}</p>
             <p dir="ltr" className="text-end font-montserrat text-sm font-bold text-brand-ink">
-              {siteConfig.phoneDisplay}
+              {settings.phoneDisplay}
             </p>
           </div>
         </a>
 
         <a
-          href={siteConfig.whatsapp}
+          href={settings.whatsapp}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-3 rounded-2xl p-2 transition-colors hover:bg-white/5"
@@ -55,13 +50,13 @@ export function ContactInfo() {
           <div>
             <p className="text-xs text-brand-ink-muted">{t("whatsappLabel")}</p>
             <p dir="ltr" className="text-end font-montserrat text-sm font-bold text-brand-ink">
-              {siteConfig.phoneDisplay}
+              {settings.phoneDisplay}
             </p>
           </div>
         </a>
 
         <a
-          href={`mailto:${siteConfig.email}`}
+          href={`mailto:${settings.email}`}
           className="flex items-center gap-3 rounded-2xl p-2 transition-colors hover:bg-white/5"
         >
           <span className="gradient-brand flex size-11 shrink-0 items-center justify-center rounded-xl">
@@ -70,7 +65,7 @@ export function ContactInfo() {
           <div>
             <p className="text-xs text-brand-ink-muted">{t("emailLabel")}</p>
             <p dir="ltr" className="text-end text-sm font-bold text-brand-ink">
-              {siteConfig.email}
+              {settings.email}
             </p>
           </div>
         </a>
@@ -88,8 +83,8 @@ export function ContactInfo() {
         <div className="flex items-center justify-between gap-3 border-t border-white/10 pt-4">
           <p className="text-sm font-bold text-brand-ink">{t("followUsLabel")}</p>
           <div className="flex gap-2">
-            {siteConfig.socials.map((social) => {
-              const Icon = socialIcons[social.name];
+            {settings.socials.map((social) => {
+              const Icon = socialIcon(social.name);
               return (
                 <a
                   key={social.name}
@@ -99,7 +94,7 @@ export function ContactInfo() {
                   aria-label={social.name}
                   className="glass flex size-9 items-center justify-center rounded-full text-brand-ink-muted transition-colors hover:text-brand-rose"
                 >
-                  {Icon && <Icon className="size-4" />}
+                  <Icon className="size-4" />
                 </a>
               );
             })}

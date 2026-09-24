@@ -6,13 +6,14 @@ import { useTranslations } from "next-intl";
 import { CalendarDays, MessageSquare, Phone, User } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { GlassCard } from "@/components/ui/GlassCard";
-import { siteConfig } from "@/lib/site-config";
+import { useSiteSettings } from "@/components/layout/SiteSettingsProvider";
 
 const fieldClass =
   "w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-brand-ink placeholder:text-brand-ink-muted/70 outline-none transition-colors focus:border-brand-rose/60";
 
 export function BookingForm() {
   const t = useTranslations("contactPage.form");
+  const { whatsapp } = useSiteSettings();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [service, setService] = useState("");
@@ -41,7 +42,7 @@ export function BookingForm() {
       `${t("notesLabel")}: ${notes || t("noNotes")}`,
     ].join("\n");
 
-    const url = `${siteConfig.whatsapp}?text=${encodeURIComponent(message)}`;
+    const url = `${whatsapp}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank", "noopener,noreferrer");
   };
 

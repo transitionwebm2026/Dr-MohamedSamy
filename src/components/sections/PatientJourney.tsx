@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
+import { AmbientBackground } from "@/components/ui/AmbientBackground";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { cn } from "@/lib/utils";
 import { journeySteps } from "@/lib/data";
@@ -12,6 +13,7 @@ export function PatientJourney() {
 
   return (
     <section id="journey" className="relative py-20 sm:py-28">
+      <AmbientBackground />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
 
