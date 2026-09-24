@@ -6,9 +6,11 @@ async function main() {
 
   const W = 1200,
     H = 630;
-  const logoSize = 320;
-  const logoX = 90;
-  const logoY = (H - logoSize) / 2;
+  // Everything that matters sits inside the centered 630x630 square: WhatsApp's
+  // small link card crops the wide image to that square, so the logo must live there.
+  const logoSize = 380;
+  const logoX = (W - logoSize) / 2;
+  const logoY = 44;
   const logoCx = logoX + logoSize / 2;
   const logoCy = logoY + logoSize / 2;
 
@@ -37,19 +39,17 @@ async function main() {
   <rect width="${W}" height="${H}" fill="url(#bg)"/>
   <circle cx="1050" cy="80" r="260" fill="url(#glow1)"/>
   <circle cx="150" cy="620" r="220" fill="url(#glow2)"/>
+  <circle cx="600" cy="${logoCy}" r="330" fill="url(#glow2)" fill-opacity="0.55"/>
 
   <circle cx="${logoCx}" cy="${logoCy}" r="${logoSize / 2 + 14}" fill="none" stroke="#f5eefc" stroke-opacity="0.35" stroke-width="2"/>
   <image href="data:image/png;base64,${logoB64}" x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" clip-path="url(#logoClip)"/>
 
-  <text x="1120" y="255" text-anchor="end" font-family="Tahoma, Arial" font-size="66" font-weight="bold" fill="#f5eefc">دكتور محمد سامي</text>
-  <text x="1120" y="315" text-anchor="end" font-family="Tahoma, Arial" font-size="32" fill="#f6e2ea">استشاري أمراض الجهاز الهضمي</text>
-  <text x="1120" y="360" text-anchor="end" font-family="Tahoma, Arial" font-size="32" fill="#f6e2ea">والكبد والمناظير</text>
-
-  <rect x="900" y="400" width="220" height="3" fill="#f5eefc" fill-opacity="0.4"/>
-  <text x="1120" y="440" text-anchor="end" font-family="Tahoma, Arial" font-size="22" fill="#cbb8de">Dr. Mohamed Sami · dr-mohamedsami.com</text>
+  <text x="600" y="530" text-anchor="middle" font-family="Tahoma, Arial" font-size="62" font-weight="bold" fill="#f5eefc">دكتور محمد سامي</text>
+  <text x="600" y="580" text-anchor="middle" font-family="Tahoma, Arial" font-size="28" fill="#f6e2ea">Dr. Mohamed Sami</text>
 </svg>`;
 
-  await sharp(Buffer.from(svg)).png().toFile("src/app/opengraph-image.png");
+  // palette-quantized so it stays well under WhatsApp's ~300KB link-preview limit
+  await sharp(Buffer.from(svg)).png({ palette: true, quality: 92, compressionLevel: 9, effort: 8 }).toFile("src/app/opengraph-image.png");
 
   // Favicon / app icons, generated from the same cropped logo mark.
   await sharp("public/images/logo-icon.png").resize(512, 512).png().toFile("src/app/icon.png");

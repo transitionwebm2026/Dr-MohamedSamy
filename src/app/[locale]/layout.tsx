@@ -13,7 +13,7 @@ import { CallButton } from "@/components/layout/CallButton";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { SiteSettingsProvider } from "@/components/layout/SiteSettingsProvider";
 import { getLayoutData } from "@/lib/cms/layout";
-import { siteConfig } from "@/lib/site-config";
+import { getSiteUrl } from "@/lib/site-url";
 
 // "DG Tebian" is not available as a web font; Tajawal is used as the
 // production-ready Arabic typeface it was requested as a fallback for.
@@ -45,9 +45,10 @@ type Props = { children: React.ReactNode; params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: Pick<Props, "params">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "site" });
+  const siteUrl = await getSiteUrl();
 
   return {
-    metadataBase: new URL(siteConfig.url),
+    metadataBase: new URL(siteUrl),
     title: {
       default: `${t("name")} | ${t("title")}`,
       template: `%s | ${t("name")}`,
@@ -67,7 +68,7 @@ export async function generateMetadata({ params }: Pick<Props, "params">): Promi
     openGraph: {
       type: "website",
       locale: locale === "ar" ? "ar_EG" : "en_US",
-      url: siteConfig.url,
+      url: siteUrl,
       title: `${t("name")} | ${t("title")}`,
       description: t("description"),
       siteName: t("name"),
@@ -87,7 +88,7 @@ export async function generateMetadata({ params }: Pick<Props, "params">): Promi
       images: ["/opengraph-image.png"],
     },
     alternates: {
-      canonical: siteConfig.url,
+      canonical: siteUrl,
       languages: { ar: "/ar", en: "/en" },
     },
   };
@@ -103,6 +104,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const t = await getTranslations({ locale, namespace: "site" });
   const dir = locale === "ar" ? "rtl" : "ltr";
   const { settings, navbar, footer } = await getLayoutData(locale);
+  const siteUrl = await getSiteUrl();
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -111,7 +113,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     alternateName: t("name"),
     medicalSpecialty: ["Gastroenterology", "Hepatology", "Endoscopy"],
     description: t("description"),
-    url: siteConfig.url,
+    url: siteUrl,
     telephone: settings.phone,
     email: settings.email,
     address: {
