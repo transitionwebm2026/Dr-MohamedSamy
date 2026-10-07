@@ -11,10 +11,15 @@ import { AmbientBackground } from "@/components/ui/AmbientBackground";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { LiquidButton } from "@/components/ui/LiquidButton";
-import { reviews } from "@/lib/data";
+import { patientReviews } from "@/lib/data";
+
+// Shows the same reviews as the Reviews page (the first few of the same
+// list), so the two pages never drift into separate, duplicated content.
+const homeReviews = patientReviews.slice(0, 4);
 
 export function Reviews() {
   const t = useTranslations("reviews");
+  const tItems = useTranslations("reviewsPage.gallery");
 
   return (
     <section id="reviews" className="relative py-20 sm:py-28">
@@ -41,8 +46,8 @@ export function Reviews() {
             }}
             className="!pb-2"
           >
-            {reviews.map((review) => {
-              const name = t(`items.${review.key}.name`);
+            {homeReviews.map((review) => {
+              const name = tItems(`items.${review.key}.name`);
               return (
                 <SwiperSlide key={review.key} className="h-auto py-2">
                   <GlassCard glow className="flex h-full flex-col">
@@ -53,7 +58,7 @@ export function Reviews() {
                       ))}
                     </div>
                     <p className="mt-4 flex-1 text-sm leading-relaxed text-brand-ink-muted">
-                      {t(`items.${review.key}.text`)}
+                      {tItems(`items.${review.key}.text`)}
                     </p>
                     <div className="mt-6 flex items-center gap-3 border-t border-white/10 pt-4">
                       <span className="gradient-brand flex size-10 items-center justify-center rounded-full text-sm font-bold text-white">
@@ -61,7 +66,7 @@ export function Reviews() {
                       </span>
                       <div>
                         <p className="text-sm font-bold text-brand-ink">{name}</p>
-                        <p className="text-xs text-brand-ink-muted">{t(`items.${review.key}.procedure`)}</p>
+                        <p className="text-xs text-brand-ink-muted">{tItems(`items.${review.key}.procedure`)}</p>
                       </div>
                     </div>
                   </GlassCard>

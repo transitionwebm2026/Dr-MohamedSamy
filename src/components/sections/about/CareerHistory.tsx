@@ -6,6 +6,8 @@ import { AmbientBackground } from "@/components/ui/AmbientBackground";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { cn } from "@/lib/utils";
 import { careerHistory } from "@/lib/data";
+import { findItem } from "@/lib/cms/helpers";
+import type { DynamicItem } from "@/lib/supabase/types";
 
 const containerVariants: Variants = {
   hidden: {},
@@ -38,7 +40,7 @@ const textVariants: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
 };
 
-export function CareerHistory() {
+export function CareerHistory({ items = [] }: { items?: DynamicItem[] }) {
   const t = useTranslations("aboutPage.career");
   const isRtl = useLocale() === "ar";
 
@@ -67,7 +69,11 @@ export function CareerHistory() {
             viewport={{ once: true, amount: 0.3 }}
             className="grid gap-8 lg:grid-cols-5"
           >
-            {careerHistory.map((step) => (
+            {careerHistory.map((step) => {
+              const dbItem = findItem(items, step.key);
+              const year = typeof dbItem?.extra?.year === "string" ? dbItem.extra.year : step.year;
+
+              return (
               <motion.div
                 key={step.key}
                 variants={itemVariants}
@@ -80,15 +86,17 @@ export function CareerHistory() {
                   <motion.span variants={ringVariants} className="absolute inset-0 rounded-2xl bg-brand-rose/50" />
                   <span className="gradient-brand glow-border absolute inset-0 rounded-2xl border border-white/25" />
                   <step.icon className="relative z-10 size-7 text-white" />
-                  <span
-                    dir="ltr"
-                    className={cn(
-                      "glass absolute -top-2 flex h-6 items-center rounded-full px-2 text-[11px] font-extrabold text-brand-rose",
-                      isRtl ? "-start-3" : "-end-3",
-                    )}
-                  >
-                    {step.year}
-                  </span>
+                  {year && (
+                    <span
+                      dir="ltr"
+                      className={cn(
+                        "glass absolute -top-2 flex h-6 items-center rounded-full px-2 text-[11px] font-extrabold text-brand-rose",
+                        isRtl ? "-start-3" : "-end-3",
+                      )}
+                    >
+                      {year}
+                    </span>
+                  )}
                 </motion.div>
                 <motion.h3 variants={textVariants} className="mt-5 text-base font-bold text-brand-ink">
                   {t(`items.${step.key}.title`)}
@@ -100,7 +108,8 @@ export function CareerHistory() {
                   {t(`items.${step.key}.description`)}
                 </motion.p>
               </motion.div>
-            ))}
+              );
+            })}
           </motion.div>
         </div>
       </div>

@@ -111,12 +111,6 @@ export const topVideos: { key: string; duration: string }[] = [
   { key: "colonoscopyTips", duration: "02:58" },
 ];
 
-export const reviews: { key: string; rating: number }[] = [
-  { key: "ahmed", rating: 5 },
-  { key: "sara", rating: 5 },
-  { key: "mahmoud", rating: 5 },
-  { key: "mona", rating: 5 },
-];
 
 // ---------- About page ----------
 

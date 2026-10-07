@@ -239,20 +239,6 @@ function applyPage(patch: Json, pageSlug: string, page: PageData, locale: string
         if (item.item_key && title) setPath(patch, `topVideos.items.${item.item_key}`, { title });
       }
     }
-    const reviews = get("reviews");
-    if (reviews) {
-      for (const item of reviews.items) {
-        if (!item.item_key) continue;
-        const name = locale === "ar" ? item.title_ar : item.title_en;
-        const text = locale === "ar" ? item.description_ar : item.description_en;
-        const procedure = pick(item.extra?.procedure, locale);
-        const p: Json = {};
-        if (name) p.name = name;
-        if (text) p.text = text;
-        if (procedure) p.procedure = procedure;
-        if (Object.keys(p).length) setPath(patch, `reviews.items.${item.item_key}`, p);
-      }
-    }
     const guide = get("patient_guide");
     if (guide) {
       for (const item of guide.items) {

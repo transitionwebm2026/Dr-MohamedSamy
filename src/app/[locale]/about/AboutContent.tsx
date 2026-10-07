@@ -20,9 +20,9 @@ export async function AboutContent() {
       <AboutHero />
       <BioSection />
       <IntroVideo content={byKey.get("intro_video")?.content} />
-      <AcademicTimeline />
+      <AcademicTimeline items={byKey.get("academic_timeline")?.items ?? []} />
       <ExpertiseAreas items={byKey.get("expertise_areas")?.items ?? []} />
-      <CareerHistory />
+      <CareerHistory items={byKey.get("career_history")?.items ?? []} />
       <CoreSpecializations />
       <PhilosophySection />
       <DoctorMessage />

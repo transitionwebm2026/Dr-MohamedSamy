@@ -6,8 +6,10 @@ import { AmbientBackground } from "@/components/ui/AmbientBackground";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { academicTrack } from "@/lib/data";
+import { findItem } from "@/lib/cms/helpers";
+import type { DynamicItem } from "@/lib/supabase/types";
 
-export function AcademicTimeline() {
+export function AcademicTimeline({ items = [] }: { items?: DynamicItem[] }) {
   const t = useTranslations("aboutPage.academic");
 
   return (
@@ -29,7 +31,11 @@ export function AcademicTimeline() {
           />
 
           <div className="space-y-8">
-            {academicTrack.map((item, i) => (
+            {academicTrack.map((item, i) => {
+              const dbItem = findItem(items, item.key);
+              const year = typeof dbItem?.extra?.year === "string" ? dbItem.extra.year : item.year;
+
+              return (
               <motion.div
                 key={item.key}
                 initial={{ opacity: 0, y: 24 }}
@@ -44,12 +50,14 @@ export function AcademicTimeline() {
 
                 <GlassCard hover={false} className="flex-1 p-5 sm:p-6">
                   <div className="flex flex-wrap items-center gap-3">
-                    <span
-                      dir="ltr"
-                      className="glass inline-flex items-center rounded-full px-3 py-1 font-montserrat text-xs font-extrabold text-brand-rose"
-                    >
-                      {item.year}
-                    </span>
+                    {year && (
+                      <span
+                        dir="ltr"
+                        className="glass inline-flex items-center rounded-full px-3 py-1 font-montserrat text-xs font-extrabold text-brand-rose"
+                      >
+                        {year}
+                      </span>
+                    )}
                     <h3 className="text-base font-bold text-brand-ink sm:text-lg">
                       {t(`items.${item.key}.title`)}
                     </h3>
@@ -59,7 +67,8 @@ export function AcademicTimeline() {
                   </p>
                 </GlassCard>
               </motion.div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
