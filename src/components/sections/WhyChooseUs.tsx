@@ -8,8 +8,9 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { DoctorFrame } from "@/components/ui/DoctorFrame";
 import { whyChooseUsPoints } from "@/lib/data";
 
-export function WhyChooseUs() {
+export function WhyChooseUs({ content }: { content?: Record<string, unknown> }) {
   const t = useTranslations("whyChooseUs");
+  const imageUrl = typeof content?.imageUrl === "string" ? content.imageUrl : undefined;
 
   return (
     <section className="relative py-20 sm:py-28">
@@ -23,7 +24,7 @@ export function WhyChooseUs() {
             transition={{ duration: 0.6 }}
             className="relative mx-auto w-full max-w-sm lg:mx-0"
           >
-            <DoctorFrame ratio="portrait" />
+            <DoctorFrame ratio="portrait" src={imageUrl} alt={t("badgeTitle")} />
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}

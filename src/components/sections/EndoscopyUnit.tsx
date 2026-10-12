@@ -6,11 +6,13 @@ import { ArrowLeft } from "lucide-react";
 import { AmbientBackground } from "@/components/ui/AmbientBackground";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { GlassCard } from "@/components/ui/GlassCard";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { MediaImage } from "@/components/ui/MediaImage";
 import { LiquidButton } from "@/components/ui/LiquidButton";
 import { endoscopyProcedures } from "@/lib/data";
+import { findItem } from "@/lib/cms/helpers";
+import type { DynamicItem } from "@/lib/supabase/types";
 
-export function EndoscopyUnit() {
+export function EndoscopyUnit({ items = [] }: { items?: DynamicItem[] }) {
   const t = useTranslations("endoscopy");
 
   return (
@@ -33,7 +35,12 @@ export function EndoscopyUnit() {
                 transition={{ duration: 0.55, delay: i * 0.12 }}
                 className="flex flex-col p-5 sm:p-6"
               >
-                <MediaPlaceholder icon={Icon} ratio="video" />
+                <MediaImage
+                  src={findItem(items, item.key)?.image_url || `/images/home/${item.key}.jpg`}
+                  alt={t(`items.${item.key}.title`)}
+                  icon={Icon}
+                  ratio="video"
+                />
                 <h3 className="mt-5 text-xl font-bold text-brand-ink">{t(`items.${item.key}.title`)}</h3>
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-ink-muted">
                   {t(`items.${item.key}.description`)}

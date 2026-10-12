@@ -4,10 +4,12 @@ import { useTranslations } from "next-intl";
 import { AmbientBackground } from "@/components/ui/AmbientBackground";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { GlassCard } from "@/components/ui/GlassCard";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { MediaImage } from "@/components/ui/MediaImage";
 import { coreSpecializations } from "@/lib/data";
+import { findItem } from "@/lib/cms/helpers";
+import type { DynamicItem } from "@/lib/supabase/types";
 
-export function CoreSpecializations() {
+export function CoreSpecializations({ items = [] }: { items?: DynamicItem[] }) {
   const t = useTranslations("aboutPage.specializations");
 
   return (
@@ -27,7 +29,12 @@ export function CoreSpecializations() {
               transition={{ duration: 0.55, delay: i * 0.12 }}
               className="flex flex-col p-4 sm:p-5"
             >
-              <MediaPlaceholder icon={item.icon} ratio="square" />
+              <MediaImage
+                src={findItem(items, item.key)?.image_url || `/images/about/${item.key}.jpg`}
+                alt={t(`items.${item.key}.title`)}
+                icon={item.icon}
+                ratio="square"
+              />
               <h3 className="mt-4 text-base font-bold text-brand-ink">{t(`items.${item.key}.title`)}</h3>
               <p className="mt-2 text-sm leading-relaxed text-brand-ink-muted">
                 {t(`items.${item.key}.description`)}

@@ -6,6 +6,8 @@ import { AmbientBackground } from "@/components/ui/AmbientBackground";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { TiltCard } from "@/components/sections/reviews/TiltCard";
 import { patientReviews } from "@/lib/data";
+import { findItem } from "@/lib/cms/helpers";
+import type { DynamicItem } from "@/lib/supabase/types";
 
 function StarRow({ rating }: { rating: number }) {
   return (
@@ -26,7 +28,7 @@ function VerifiedBadge({ label }: { label: string }) {
   );
 }
 
-export function ReviewsBentoGrid() {
+export function ReviewsBentoGrid({ items = [] }: { items?: DynamicItem[] }) {
   const t = useTranslations("reviewsPage.gallery");
 
   return (
@@ -35,8 +37,10 @@ export function ReviewsBentoGrid() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
 
-        <div className="mt-14 grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {patientReviews.map((review, i) => (
+        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {patientReviews.map((review, i) => {
+            const photo = findItem(items, review.key)?.image_url;
+            return (
             <TiltCard
               key={review.key}
               initial={{ opacity: 0, y: 36, scale: 0.92 }}
@@ -47,31 +51,38 @@ export function ReviewsBentoGrid() {
                 ease: [0.22, 1, 0.36, 1],
                 delay: (i % 3) * 0.1 + Math.floor(i / 3) * 0.12,
               }}
-              className="glow-border glass flex h-[380px] flex-col overflow-hidden rounded-3xl p-6 sm:p-7"
+              className="glow-border glass flex flex-col overflow-hidden rounded-3xl p-6 sm:p-7"
             >
               <div className="flex items-center justify-between gap-2">
-                <span className="gradient-brand flex size-11 shrink-0 items-center justify-center rounded-full text-base font-bold text-white">
-                  {t(`items.${review.key}.name`).charAt(0)}
-                </span>
+                {photo ? (
+                  // eslint-disable-next-line @next/next/no-img-element -- small avatar, remote upload from the dashboard
+                  <img
+                    src={photo}
+                    alt={t(`items.${review.key}.name`)}
+                    className="size-11 shrink-0 rounded-full object-cover"
+                  />
+                ) : (
+                  <span className="gradient-brand flex size-11 shrink-0 items-center justify-center rounded-full text-base font-bold text-white">
+                    {t(`items.${review.key}.name`).charAt(0)}
+                  </span>
+                )}
                 <div className="flex flex-col items-end gap-2">
                   <StarRow rating={review.rating} />
                   <Quote className="size-6 text-brand-rose/50" />
                 </div>
               </div>
 
-              <p className="mt-4 line-clamp-2 text-sm leading-relaxed text-brand-ink-muted sm:text-base">
+              <p className="mt-4 text-sm leading-relaxed text-brand-ink-muted sm:text-base">
                 {t(`items.${review.key}.text`)}
               </p>
 
               <div className="mt-auto flex items-center justify-between gap-3 border-t border-white/10 pt-4">
                 <VerifiedBadge label={t("verifiedBadge")} />
-                <div className="text-end">
-                  <p className="text-sm font-bold text-brand-ink">{t(`items.${review.key}.name`)}</p>
-                  <p className="text-xs text-brand-ink-muted">{t(`items.${review.key}.procedure`)}</p>
-                </div>
+                <p className="text-sm font-bold text-brand-ink">{t(`items.${review.key}.name`)}</p>
               </div>
             </TiltCard>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

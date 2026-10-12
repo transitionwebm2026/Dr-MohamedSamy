@@ -3,15 +3,18 @@
 import { motion } from "framer-motion";
 import { Stethoscope } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { MediaImage } from "@/components/ui/MediaImage";
 
 /**
- * Placeholder for the doctor's portrait. Swap the inner content for a real
- * <Image src="/doctor.jpg" .../> once photography assets are provided —
- * the glass frame, glow ring and aspect ratio are designed to work as-is.
+ * The doctor's portrait frame. Pass `src` (an uploaded photo URL from the
+ * dashboard) to show a real photo; without one it falls back to the original
+ * decorative gradient + stethoscope placeholder.
  */
 type DoctorFrameProps = {
   className?: string;
   ratio?: "portrait" | "square" | "wide";
+  src?: string;
+  alt?: string;
 };
 
 const ratioClasses: Record<NonNullable<DoctorFrameProps["ratio"]>, string> = {
@@ -20,7 +23,14 @@ const ratioClasses: Record<NonNullable<DoctorFrameProps["ratio"]>, string> = {
   wide: "aspect-video",
 };
 
-export function DoctorFrame({ className, ratio = "portrait" }: DoctorFrameProps) {
+// MediaImage uses "video" where DoctorFrame says "wide" for the same aspect ratio.
+const mediaImageRatio: Record<NonNullable<DoctorFrameProps["ratio"]>, "video" | "square" | "portrait"> = {
+  portrait: "portrait",
+  square: "square",
+  wide: "video",
+};
+
+export function DoctorFrame({ className, ratio = "portrait", src, alt = "" }: DoctorFrameProps) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.92 }}
@@ -30,24 +40,34 @@ export function DoctorFrame({ className, ratio = "portrait" }: DoctorFrameProps)
       className={cn("group relative", className)}
     >
       <div className="glow-border glass-strong relative overflow-hidden rounded-[2.5rem] p-2">
-        <div
-          className={cn(
-            ratioClasses[ratio],
-            "gradient-brand relative w-full overflow-hidden rounded-[2rem]",
-          )}
-        >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.18),transparent_55%)]" />
-          <div className="flex h-full w-full items-center justify-center">
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="glass flex size-24 items-center justify-center rounded-full sm:size-32"
-            >
-              <Stethoscope className="size-12 text-white/90 sm:size-16" strokeWidth={1.5} />
-            </motion.div>
+        {src ? (
+          <MediaImage
+            src={src}
+            alt={alt}
+            icon={Stethoscope}
+            ratio={mediaImageRatio[ratio]}
+            className="rounded-[2rem]"
+          />
+        ) : (
+          <div
+            className={cn(
+              ratioClasses[ratio],
+              "gradient-brand relative w-full overflow-hidden rounded-[2rem]",
+            )}
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.18),transparent_55%)]" />
+            <div className="flex h-full w-full items-center justify-center">
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="glass flex size-24 items-center justify-center rounded-full sm:size-32"
+              >
+                <Stethoscope className="size-12 text-white/90 sm:size-16" strokeWidth={1.5} />
+              </motion.div>
+            </div>
+            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-brand-dark/70 to-transparent" />
           </div>
-          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-brand-dark/70 to-transparent" />
-        </div>
+        )}
       </div>
 
       {/* glow ring accent */}

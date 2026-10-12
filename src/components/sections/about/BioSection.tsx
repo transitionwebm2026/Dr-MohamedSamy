@@ -6,8 +6,9 @@ import { AmbientBackground } from "@/components/ui/AmbientBackground";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { DoctorFrame } from "@/components/ui/DoctorFrame";
 
-export function BioSection() {
+export function BioSection({ content }: { content?: Record<string, unknown> }) {
   const t = useTranslations("aboutPage.bio");
+  const imageUrl = typeof content?.imageUrl === "string" ? content.imageUrl : undefined;
 
   return (
     <section className="relative py-20 sm:py-28">
@@ -21,7 +22,7 @@ export function BioSection() {
             transition={{ duration: 0.6 }}
             className="mx-auto w-full max-w-sm lg:mx-0"
           >
-            <DoctorFrame ratio="portrait" />
+            <DoctorFrame ratio="portrait" src={imageUrl} alt={t("title")} />
           </motion.div>
 
           <motion.div

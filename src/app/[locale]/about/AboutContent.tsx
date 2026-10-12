@@ -18,14 +18,14 @@ export async function AboutContent() {
   return (
     <>
       <AboutHero />
-      <BioSection />
+      <BioSection content={byKey.get("bio")?.content} />
       <IntroVideo content={byKey.get("intro_video")?.content} />
       <AcademicTimeline items={byKey.get("academic_timeline")?.items ?? []} />
       <ExpertiseAreas items={byKey.get("expertise_areas")?.items ?? []} />
       <CareerHistory items={byKey.get("career_history")?.items ?? []} />
-      <CoreSpecializations />
+      <CoreSpecializations items={byKey.get("core_specializations")?.items ?? []} />
       <PhilosophySection />
-      <DoctorMessage />
+      <DoctorMessage content={byKey.get("doctor_message")?.content} />
       <AchievementsStats items={statsSection?.items ?? []} />
       <AboutCTA />
     </>

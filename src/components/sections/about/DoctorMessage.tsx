@@ -6,8 +6,9 @@ import { useTranslations } from "next-intl";
 import { Stethoscope } from "lucide-react";
 import { AmbientBackground } from "@/components/ui/AmbientBackground";
 
-export function DoctorMessage() {
+export function DoctorMessage({ content }: { content?: Record<string, unknown> }) {
   const t = useTranslations("aboutPage.message");
+  const imageUrl = typeof content?.imageUrl === "string" && content.imageUrl ? content.imageUrl : "/images/doctor-avatar.jpg";
 
   return (
     <section className="relative py-20 sm:py-28">
@@ -21,13 +22,22 @@ export function DoctorMessage() {
           transition={{ duration: 0.7 }}
           className="glow-border glass-strong relative rounded-[2.5rem] px-6 py-12 text-center sm:px-14 sm:py-16"
         >
-          <Image
-            src="/images/doctor-avatar.jpg"
-            alt={t("signatureName")}
-            width={160}
-            height={160}
-            className="mx-auto mb-6 size-20 rounded-full object-cover ring-2 ring-brand-rose/60 shadow-[0_10px_30px_-8px_rgba(225,148,159,0.5)]"
-          />
+          {imageUrl.startsWith("/") ? (
+            <Image
+              src={imageUrl}
+              alt={t("signatureName")}
+              width={160}
+              height={160}
+              className="mx-auto mb-6 size-20 rounded-full object-cover ring-2 ring-brand-rose/60 shadow-[0_10px_30px_-8px_rgba(225,148,159,0.5)]"
+            />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element -- remote upload from the dashboard
+            <img
+              src={imageUrl}
+              alt={t("signatureName")}
+              className="mx-auto mb-6 size-20 rounded-full object-cover ring-2 ring-brand-rose/60 shadow-[0_10px_30px_-8px_rgba(225,148,159,0.5)]"
+            />
+          )}
 
           <span className="glass mb-5 inline-flex items-center rounded-full px-4 py-1.5 text-xs font-bold tracking-wide text-brand-rose sm:text-sm">
             {t("eyebrow")}

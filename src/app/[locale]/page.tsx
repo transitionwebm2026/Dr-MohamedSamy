@@ -26,12 +26,12 @@ export default async function Home({ params }: Props) {
     <>
       <Hero />
       <Stats items={byKey.get("stats")?.items ?? []} />
-      <SymptomChecker />
+      <SymptomChecker items={byKey.get("symptom_checker")?.items ?? []} />
       <AboutDoctor content={byKey.get("about_doctor")?.content} />
-      <Treatments />
-      <EndoscopyUnit />
+      <Treatments items={byKey.get("treatments")?.items ?? []} />
+      <EndoscopyUnit items={byKey.get("endoscopy_unit")?.items ?? []} />
       <PatientJourney />
-      <WhyChooseUs />
+      <WhyChooseUs content={byKey.get("why_choose_us")?.content} />
       <PatientGuide />
       <TopVideos items={byKey.get("top_videos")?.items ?? []} />
       <Reviews />

@@ -6,11 +6,13 @@ import { ArrowLeft } from "lucide-react";
 import { AmbientBackground } from "@/components/ui/AmbientBackground";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { GlassCard } from "@/components/ui/GlassCard";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { MediaImage } from "@/components/ui/MediaImage";
 import { LiquidButton } from "@/components/ui/LiquidButton";
 import { symptomCards } from "@/lib/data";
+import { findItem } from "@/lib/cms/helpers";
+import type { DynamicItem } from "@/lib/supabase/types";
 
-export function SymptomChecker() {
+export function SymptomChecker({ items = [] }: { items?: DynamicItem[] }) {
   const t = useTranslations("symptoms");
 
   return (
@@ -31,7 +33,12 @@ export function SymptomChecker() {
                 transition={{ duration: 0.55, delay: i * 0.12 }}
                 className="flex flex-col p-5 sm:p-6"
               >
-                <MediaPlaceholder icon={Icon} ratio="video" />
+                <MediaImage
+                  src={findItem(items, card.key)?.image_url || `/images/home/${card.key}.jpg`}
+                  alt={t(`items.${card.key}.title`)}
+                  icon={Icon}
+                  ratio="video"
+                />
                 <h3 className="mt-5 text-xl font-bold text-brand-ink">{t(`items.${card.key}.title`)}</h3>
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-ink-muted">
                   {t(`items.${card.key}.description`)}

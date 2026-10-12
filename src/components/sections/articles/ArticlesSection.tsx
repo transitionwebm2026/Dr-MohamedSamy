@@ -7,9 +7,11 @@ import { ArrowLeft, Clock, X, type LucideIcon } from "lucide-react";
 import { AmbientBackground } from "@/components/ui/AmbientBackground";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { GlassCard } from "@/components/ui/GlassCard";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import { MediaImage } from "@/components/ui/MediaImage";
 import { cn } from "@/lib/utils";
 import { articleCategoryIcons, articleGrid, articleList, featuredArticle } from "@/lib/data";
+import { findItem } from "@/lib/cms/helpers";
+import type { DynamicItem } from "@/lib/supabase/types";
 
 const categoryClass: Record<string, string> = {
   digestive: "border-brand-primary/40 bg-brand-primary/20 text-brand-ink",
@@ -67,11 +69,13 @@ function ArticleCard({
   article,
   index,
   t,
+  imageUrl,
   onOpen,
 }: {
   article: ArticleCardData;
   index: number;
   t: ReturnType<typeof useTranslations>;
+  imageUrl?: string;
   onOpen: () => void;
 }) {
   return (
@@ -83,7 +87,12 @@ function ArticleCard({
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="flex flex-col p-5 sm:p-6"
     >
-      <MediaPlaceholder icon={article.icon} ratio="video" />
+      <MediaImage
+        src={imageUrl || `/images/articles/${article.key}.jpg`}
+        alt={t(`items.${article.key}.title`)}
+        icon={article.icon}
+        ratio="video"
+      />
       <CategoryBadge category={article.category} label={t(`categories.${article.category}`)} className="mt-4" />
       <h4 className="mt-3 text-base font-bold text-brand-ink">{t(`items.${article.key}.title`)}</h4>
       <p className="line-clamp-3 mt-2 flex-1 text-sm leading-relaxed text-brand-ink-muted">
@@ -97,11 +106,12 @@ function ArticleCard({
   );
 }
 
-export function ArticlesSection() {
+export function ArticlesSection({ items = [] }: { items?: DynamicItem[] }) {
   const t = useTranslations("articlesPage.section");
   const [openKey, setOpenKey] = useState<string | null>(null);
   const openArticle = allArticles.find((a) => a.key === openKey);
   const openParagraphs = openArticle ? t(`items.${openArticle.key}.content`).split("\n\n") : [];
+  const imageFor = (key: string) => findItem(items, key)?.image_url || `/images/articles/${key}.jpg`;
 
   return (
     <section className="relative py-20 sm:py-28">
@@ -117,7 +127,13 @@ export function ArticlesSection() {
           transition={{ duration: 0.6 }}
           className="glow-border glass-strong mt-14 grid overflow-hidden rounded-[2rem] lg:grid-cols-2"
         >
-          <MediaPlaceholder icon={featuredArticle.icon} ratio="video" className="h-full rounded-none" />
+          <MediaImage
+            src={imageFor(featuredArticle.key)}
+            alt={t(`items.${featuredArticle.key}.title`)}
+            icon={featuredArticle.icon}
+            ratio="video"
+            className="h-full rounded-none"
+          />
           <div className="flex flex-col justify-center p-6 sm:p-10">
             <CategoryBadge category={featuredArticle.category} label={t(`categories.${featuredArticle.category}`)} />
             <h3 className="mt-4 text-xl font-extrabold leading-snug text-brand-ink sm:text-2xl lg:text-3xl">
@@ -136,14 +152,28 @@ export function ArticlesSection() {
         {/* 3 articles */}
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {articleList.map((article, i) => (
-            <ArticleCard key={article.key} article={article} index={i} t={t} onOpen={() => setOpenKey(article.key)} />
+            <ArticleCard
+              key={article.key}
+              article={article}
+              index={i}
+              t={t}
+              imageUrl={imageFor(article.key)}
+              onOpen={() => setOpenKey(article.key)}
+            />
           ))}
         </div>
 
         {/* 3 more articles */}
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {articleGrid.map((article, i) => (
-            <ArticleCard key={article.key} article={article} index={i} t={t} onOpen={() => setOpenKey(article.key)} />
+            <ArticleCard
+              key={article.key}
+              article={article}
+              index={i}
+              t={t}
+              imageUrl={imageFor(article.key)}
+              onOpen={() => setOpenKey(article.key)}
+            />
           ))}
         </div>
       </div>
@@ -174,7 +204,13 @@ export function ArticlesSection() {
               </button>
 
               <div className="glass-strong max-h-[85vh] overflow-y-auto rounded-3xl p-6 sm:p-8">
-                <MediaPlaceholder icon={openArticle.icon} ratio="video" iconClassName="size-14" />
+                <MediaImage
+                  src={imageFor(openArticle.key)}
+                  alt={t(`items.${openArticle.key}.title`)}
+                  icon={openArticle.icon}
+                  ratio="video"
+                  iconClassName="size-14"
+                />
                 <CategoryBadge
                   category={openArticle.category}
                   label={t(`categories.${openArticle.category}`)}
