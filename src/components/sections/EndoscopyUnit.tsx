@@ -8,12 +8,17 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { MediaImage } from "@/components/ui/MediaImage";
 import { LiquidButton } from "@/components/ui/LiquidButton";
-import { endoscopyProcedures } from "@/lib/data";
+import { endoscopyTypes } from "@/lib/data";
 import { findItem } from "@/lib/cms/helpers";
 import type { DynamicItem } from "@/lib/supabase/types";
 
+// Shows the same endoscopy procedures managed on the Services page (the
+// first few of the same list) instead of a separately-authored set.
+const homeProcedures = endoscopyTypes.slice(0, 3);
+
 export function EndoscopyUnit({ items = [] }: { items?: DynamicItem[] }) {
   const t = useTranslations("endoscopy");
+  const tServices = useTranslations("servicesPage.endoscopyTypes");
 
   return (
     <section className="relative py-20 sm:py-28">
@@ -22,7 +27,7 @@ export function EndoscopyUnit({ items = [] }: { items?: DynamicItem[] }) {
         <SectionHeader eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {endoscopyProcedures.map((item, i) => {
+          {homeProcedures.map((item, i) => {
             const Icon = item.icon;
             return (
               <GlassCard
@@ -36,14 +41,14 @@ export function EndoscopyUnit({ items = [] }: { items?: DynamicItem[] }) {
                 className="flex flex-col p-5 sm:p-6"
               >
                 <MediaImage
-                  src={findItem(items, item.key)?.image_url || `/images/home/${item.key}.jpg`}
-                  alt={t(`items.${item.key}.title`)}
+                  src={findItem(items, item.key)?.image_url || `/images/services/${item.key}.jpg`}
+                  alt={tServices(`items.${item.key}.title`)}
                   icon={Icon}
                   ratio="video"
                 />
-                <h3 className="mt-5 text-xl font-bold text-brand-ink">{t(`items.${item.key}.title`)}</h3>
+                <h3 className="mt-5 text-xl font-bold text-brand-ink">{tServices(`items.${item.key}.title`)}</h3>
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-ink-muted">
-                  {t(`items.${item.key}.description`)}
+                  {tServices(`items.${item.key}.description`)}
                 </p>
               </GlassCard>
             );

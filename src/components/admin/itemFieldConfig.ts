@@ -35,7 +35,10 @@ export const itemFieldConfig: Record<string, ExtraFieldConfig[]> = {
     { type: "bilingual", key: "place", label: "مكان العمل" },
   ],
   category_selector: [{ type: "text", key: "anchor", label: "الرابط الداخلي (anchor)" }],
-  endoscopy_types: [{ type: "bilingualList", key: "applications", label: "دواعي الاستخدام" }],
+  endoscopy_types: [
+    { type: "bilingual", key: "description", label: "وصف مختصر (يظهر في الصفحة الرئيسية)", multiline: true },
+    { type: "bilingualList", key: "applications", label: "دواعي الاستخدام" },
+  ],
   video_gallery: [
     {
       type: "select",

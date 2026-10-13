@@ -147,7 +147,6 @@ const simpleItemPaths: Record<string, Record<string, string>> = {
   home: {
     symptom_checker: "symptoms.items",
     treatments: "treatments.items",
-    endoscopy_unit: "endoscopy.items",
     patient_journey: "journey.steps",
     why_choose_us: "whyChooseUs.points",
   },
@@ -232,13 +231,6 @@ function applyPage(patch: Json, pageSlug: string, page: PageData, locale: string
   }
 
   if (pageSlug === "home") {
-    const topVideos = get("top_videos");
-    if (topVideos) {
-      for (const item of topVideos.items) {
-        const title = locale === "ar" ? item.title_ar : item.title_en;
-        if (item.item_key && title) setPath(patch, `topVideos.items.${item.item_key}`, { title });
-      }
-    }
     const guide = get("patient_guide");
     if (guide) {
       for (const item of guide.items) {
@@ -284,9 +276,11 @@ function applyPage(patch: Json, pageSlug: string, page: PageData, locale: string
       for (const item of endoscopyTypes.items) {
         if (!item.item_key) continue;
         const title = locale === "ar" ? item.title_ar : item.title_en;
+        const description = pick(item.extra?.description, locale);
         const applications = (item.extra?.applications as Record<string, string[]> | undefined)?.[locale];
         const p: Json = {};
         if (title) p.title = title;
+        if (description) p.description = description;
         if (Array.isArray(applications) && applications.length) p.applications = applications;
         if (Object.keys(p).length) setPath(patch, `servicesPage.endoscopyTypes.items.${item.item_key}`, p);
       }

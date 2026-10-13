@@ -11,7 +11,7 @@ import { PatientGuide } from "@/components/sections/PatientGuide";
 import { TopVideos } from "@/components/sections/TopVideos";
 import { Reviews } from "@/components/sections/Reviews";
 import { FinalCTA } from "@/components/sections/FinalCTA";
-import { getPageSections } from "@/lib/cms/queries";
+import { getPageSections, getSection } from "@/lib/cms/queries";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -19,21 +19,27 @@ export default async function Home({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const sections = await getPageSections("home");
+  const [sections, videoGallery, endoscopyTypes] = await Promise.all([
+    getPageSections("home"),
+    // Home shows a preview of the SAME videos/endoscopy-types lists the
+    // dedicated pages manage, instead of keeping its own separate copy.
+    getSection("videos", "video_gallery"),
+    getSection("services", "endoscopy_types"),
+  ]);
   const byKey = new Map(sections.map((s) => [s.section_key, s]));
 
   return (
     <>
-      <Hero />
+      <Hero content={byKey.get("hero")?.content} />
       <Stats items={byKey.get("stats")?.items ?? []} />
       <SymptomChecker items={byKey.get("symptom_checker")?.items ?? []} />
       <AboutDoctor content={byKey.get("about_doctor")?.content} />
       <Treatments items={byKey.get("treatments")?.items ?? []} />
-      <EndoscopyUnit items={byKey.get("endoscopy_unit")?.items ?? []} />
+      <EndoscopyUnit items={endoscopyTypes?.items ?? []} />
       <PatientJourney />
       <WhyChooseUs content={byKey.get("why_choose_us")?.content} />
       <PatientGuide />
-      <TopVideos items={byKey.get("top_videos")?.items ?? []} />
+      <TopVideos items={videoGallery?.items ?? []} />
       <Reviews />
       <FinalCTA />
     </>

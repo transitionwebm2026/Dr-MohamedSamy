@@ -17,22 +17,28 @@ const particlePositions = [
   { top: "48%", left: "45%" },
 ];
 
-function HeroBackground() {
+function HeroBackground({ src }: { src?: string }) {
   const isRtl = useLocale() === "ar";
   // text sits at the logical "start" edge (right in RTL, left in LTR), so
   // the photo's subject and the readability wash both need to favor the
   // opposite edge depending on direction.
+  const objectPosition = cn(isRtl ? "object-[45%_18%] lg:object-[25%_18%]" : "object-[55%_18%] lg:object-[75%_18%]");
 
   return (
     <div className="absolute inset-0 -z-20 overflow-hidden">
-      <Image
-        src="/images/hero-doctor.jpg"
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className={cn("object-cover", isRtl ? "object-[45%_18%] lg:object-[25%_18%]" : "object-[55%_18%] lg:object-[75%_18%]")}
-      />
+      {src ? (
+        // eslint-disable-next-line @next/next/no-img-element -- remote upload from the dashboard, needs to behave like fill
+        <img src={src} alt="" className={cn("absolute inset-0 h-full w-full object-cover", objectPosition)} />
+      ) : (
+        <Image
+          src="/images/hero-doctor.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className={cn("object-cover", objectPosition)}
+        />
+      )}
       <div
         className={cn(
           "absolute inset-0 bg-[radial-gradient(circle_at_25%_30%,rgba(225,148,159,0.18),transparent_60%)]",
@@ -123,6 +129,7 @@ type PageHeroProps = {
   subtitle: string;
   primaryButton: HeroButton;
   secondaryButton: HeroButton;
+  backgroundImage?: string;
 };
 
 /**
@@ -130,10 +137,17 @@ type PageHeroProps = {
  * future pages) so they all share one visual design — background, contact
  * panel, button styling — and only the text/links/icons change per page.
  */
-export function PageHero({ titleLine1, titleLine2, subtitle, primaryButton, secondaryButton }: PageHeroProps) {
+export function PageHero({
+  titleLine1,
+  titleLine2,
+  subtitle,
+  primaryButton,
+  secondaryButton,
+  backgroundImage,
+}: PageHeroProps) {
   return (
     <section className="relative flex min-h-screen w-full items-center overflow-hidden pt-28 pb-28 sm:pb-16">
-      <HeroBackground />
+      <HeroBackground src={backgroundImage} />
 
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div

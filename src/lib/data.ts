@@ -73,12 +73,6 @@ export const treatments: { key: string; icon: LucideIcon }[] = [
   { key: "chronic", icon: Activity },
 ];
 
-export const endoscopyProcedures: { key: string; icon: LucideIcon }[] = [
-  { key: "gastroscopy", icon: ScanLine },
-  { key: "colonoscopy", icon: Radiation },
-  { key: "ercp", icon: Workflow },
-];
-
 export const journeySteps: { key: string; icon: LucideIcon }[] = [
   { key: "consultation", icon: ClipboardList },
   { key: "diagnosis", icon: Search },
@@ -103,12 +97,6 @@ export const patientGuideAfter: { key: string }[] = [
   { key: "rest" },
   { key: "diet" },
   { key: "symptoms" },
-];
-
-export const topVideos: { key: string; duration: string }[] = [
-  { key: "gastroscopy101", duration: "03:12" },
-  { key: "refluxCauses", duration: "04:45" },
-  { key: "colonoscopyTips", duration: "02:58" },
 ];
 
 

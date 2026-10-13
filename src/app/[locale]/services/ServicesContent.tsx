@@ -14,7 +14,7 @@ export async function ServicesContent() {
 
   return (
     <>
-      <ServicesHero />
+      <ServicesHero content={byKey.get("hero")?.content} />
       <CategorySelector items={byKey.get("category_selector")?.items ?? []} />
       {serviceCategories.map((category) => (
         <CategoryDetails

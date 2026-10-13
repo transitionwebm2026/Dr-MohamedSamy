@@ -17,7 +17,7 @@ export async function AboutContent() {
 
   return (
     <>
-      <AboutHero />
+      <AboutHero content={byKey.get("hero")?.content} />
       <BioSection content={byKey.get("bio")?.content} />
       <IntroVideo content={byKey.get("intro_video")?.content} />
       <AcademicTimeline items={byKey.get("academic_timeline")?.items ?? []} />
