@@ -4,9 +4,10 @@ import { useTranslations } from "next-intl";
 import { AmbientBackground } from "@/components/ui/AmbientBackground";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { BookingForm } from "@/components/sections/contact/BookingForm";
-import { ContactInfo } from "@/components/sections/contact/ContactInfo";
+import { BranchLocations } from "@/components/sections/contact/BranchLocations";
+import type { DynamicItem } from "@/lib/supabase/types";
 
-export function ContactSection() {
+export function ContactSection({ locations = [] }: { locations?: DynamicItem[] }) {
   const t = useTranslations("contactPage.info");
 
   return (
@@ -17,7 +18,7 @@ export function ContactSection() {
 
         <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-14">
           <BookingForm />
-          <ContactInfo />
+          <BranchLocations items={locations} />
         </div>
       </div>
     </section>

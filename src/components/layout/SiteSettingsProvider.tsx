@@ -2,12 +2,14 @@
 
 import { createContext, useContext } from "react";
 import { siteConfig } from "@/lib/site-config";
+import { displayWhatsapp } from "@/lib/phone-format";
 import type { SiteSettings } from "@/lib/cms/layout";
 
 const fallback: SiteSettings = {
   phone: siteConfig.phone,
   phoneDisplay: siteConfig.phoneDisplay,
   whatsapp: siteConfig.whatsapp,
+  whatsappDisplay: displayWhatsapp(siteConfig.whatsapp),
   email: siteConfig.email,
   socials: siteConfig.socials.map((s) => ({ name: s.name, href: s.href })),
 };

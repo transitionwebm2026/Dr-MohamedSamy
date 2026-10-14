@@ -193,9 +193,15 @@
     "description": "فيديوهات قصيرة ومبسطة بتجاوب على أكتر الأسئلة اللي بتشغل بال مرضانا.",
     "viewAll": "مشاهدة كافة الفيديوهات",
     "items": {
-      "gastroscopy101": { "title": "كل ما تريد معرفته عن منظار المعدة" },
-      "refluxCauses": { "title": "أسباب وعلاج ارتجاع المريء" },
-      "colonoscopyTips": { "title": "نصائح ما بعد منظار القولون" }
+      "gastroscopy101": {
+        "title": "كل ما تريد معرفته عن منظار المعدة"
+      },
+      "refluxCauses": {
+        "title": "أسباب وعلاج ارتجاع المريء"
+      },
+      "colonoscopyTips": {
+        "title": "نصائح ما بعد منظار القولون"
+      }
     }
   },
   "reviews": {
@@ -728,7 +734,9 @@
       "whatsappLabel": "واتساب مباشر",
       "emailLabel": "البريد الإلكتروني",
       "addressLabel": "عنوان العيادة",
-      "followUsLabel": "تابعنا على"
+      "followUsLabel": "تابعنا على",
+      "viewOnMapLabel": "فتح في خرائط جوجل",
+      "branchesLabel": "فروعنا"
     },
     "cta": {
       "title": "لسه متردد؟",

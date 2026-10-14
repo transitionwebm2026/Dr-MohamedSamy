@@ -370,10 +370,8 @@ function applyPage(patch: Json, pageSlug: string, page: PageData, locale: string
         infoEyebrow: "contactPage.info.eyebrow",
         infoTitle: "contactPage.info.title",
         infoDescription: "contactPage.info.description",
-        phoneLabel: "contactPage.info.phoneLabel",
         whatsappLabel: "contactPage.info.whatsappLabel",
         emailLabel: "contactPage.info.emailLabel",
-        addressLabel: "contactPage.info.addressLabel",
         followUsLabel: "contactPage.info.followUsLabel",
       };
       for (const [key, path] of Object.entries(map)) {

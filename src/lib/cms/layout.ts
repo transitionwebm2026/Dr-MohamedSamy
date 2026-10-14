@@ -1,5 +1,6 @@
 import { getGlobalSettings, getPageSections, localizedField, type SectionWithItems } from "@/lib/cms/queries";
 import { siteConfig } from "@/lib/site-config";
+import { displayPhone, displayWhatsapp } from "@/lib/phone-format";
 import type { DynamicItem, SocialLink } from "@/lib/supabase/types";
 
 /** Contact details + socials shared by the footer, hero panel, contact page and floating buttons. */
@@ -7,6 +8,7 @@ export type SiteSettings = {
   phone: string;
   phoneDisplay: string;
   whatsapp: string;
+  whatsappDisplay: string;
   email: string;
   socials: SocialLink[];
 };
@@ -34,8 +36,14 @@ export type FooterData = {
   nameEn?: string;
   about: { logoUrl?: string; tagline?: string } | null;
   quickLinks: { heading?: string; links?: LinkItem[] } | null;
-  /** The "follow us" column: social icons, then the phone / email / address items under them. */
-  social: { heading?: string; showPhone: boolean; showEmail: boolean; showAddress: boolean } | null;
+  /** The "follow us" column: social icons, then the phone / whatsapp / email / address items under them. */
+  social: {
+    heading?: string;
+    showPhone: boolean;
+    showWhatsapp: boolean;
+    showEmail: boolean;
+    showAddress: boolean;
+  } | null;
   bottom: {
     rights?: string;
     tagline?: string;
@@ -47,21 +55,18 @@ export type LayoutData = {
   settings: SiteSettings;
   navbar: NavbarData | null;
   footer: FooterData | null;
+  /** The contact page's branch list — the footer shows every branch's address. */
+  locations: DynamicItem[];
 };
 
 const staticSettings: SiteSettings = {
   phone: siteConfig.phone,
   phoneDisplay: siteConfig.phoneDisplay,
   whatsapp: siteConfig.whatsapp,
+  whatsappDisplay: displayWhatsapp(siteConfig.whatsapp),
   email: siteConfig.email,
   socials: siteConfig.socials.map((s) => ({ name: s.name, href: s.href })),
 };
-
-/** "+201000000000" -> "01000000000", the way the site has always displayed it. */
-function displayPhone(phone: string): string {
-  const compact = phone.replace(/\s+/g, "");
-  return compact.startsWith("+20") ? `0${compact.slice(3)}` : compact;
-}
 
 const text = (content: Record<string, unknown> | undefined, key: string, locale: string) =>
   localizedField(content, key, locale) || undefined;
@@ -95,16 +100,18 @@ function bySection(sections: SectionWithItems[]) {
  */
 export async function getLayoutData(locale: string): Promise<LayoutData> {
   try {
-    const [global, navSections, footerSections] = await Promise.all([
+    const [global, navSections, footerSections, contactSections] = await Promise.all([
       getGlobalSettings(),
       getPageSections("navbar"),
       getPageSections("footer"),
+      getPageSections("contact"),
     ]);
 
     const settings: SiteSettings = {
       phone: global?.phone || staticSettings.phone,
       phoneDisplay: global?.phone ? displayPhone(global.phone) : staticSettings.phoneDisplay,
       whatsapp: global?.whatsapp || staticSettings.whatsapp,
+      whatsappDisplay: global?.whatsapp ? displayWhatsapp(global.whatsapp) : staticSettings.whatsappDisplay,
       email: global?.email || staticSettings.email,
       socials: global?.social_links?.length ? global.social_links : staticSettings.socials,
     };
@@ -157,6 +164,7 @@ export async function getLayoutData(locale: string): Promise<LayoutData> {
               ? {
                   heading: text(social.content, "heading", locale),
                   showPhone: flag(social.content, "showPhone"),
+                  showWhatsapp: flag(social.content, "showWhatsapp"),
                   showEmail: flag(social.content, "showEmail"),
                   showAddress: flag(social.content, "showAddress"),
                 }
@@ -177,9 +185,11 @@ export async function getLayoutData(locale: string): Promise<LayoutData> {
               : null,
           };
 
-    return { settings, navbar, footer };
+    const locations = bySection(contactSections).get("locations")?.items ?? [];
+
+    return { settings, navbar, footer, locations };
   } catch {
     // Supabase unreachable/misconfigured — the site keeps its built-in defaults.
-    return { settings: staticSettings, navbar: null, footer: null };
+    return { settings: staticSettings, navbar: null, footer: null, locations: [] };
   }
 }

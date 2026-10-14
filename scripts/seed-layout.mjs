@@ -79,7 +79,13 @@ const layout = {
       {
         key: "social",
         title: "تابعنا",
-        content: { heading: both("footer.followUs"), showPhone: true, showEmail: true, showAddress: true },
+        content: {
+          heading: both("footer.followUs"),
+          showPhone: true,
+          showWhatsapp: true,
+          showEmail: true,
+          showAddress: true,
+        },
       },
       {
         key: "bottom",

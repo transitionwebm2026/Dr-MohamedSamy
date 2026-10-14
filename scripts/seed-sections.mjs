@@ -71,6 +71,7 @@ const sectionsByPage = {
   contact: [
     ["hero", "الهيرو الرئيسي"],
     ["contact_section", "الفورم ومعلومات التواصل"],
+    ["locations", "فروعنا ومواقعنا"],
     ["cta", "دعوة للتواصل"],
   ],
 };

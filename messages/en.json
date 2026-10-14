@@ -193,9 +193,15 @@
     "description": "Short, simple videos answering our patients' most common questions.",
     "viewAll": "Watch All Videos",
     "items": {
-      "gastroscopy101": { "title": "Everything You Need to Know About Gastroscopy" },
-      "refluxCauses": { "title": "Causes and Treatment of Acid Reflux" },
-      "colonoscopyTips": { "title": "Tips After a Colonoscopy" }
+      "gastroscopy101": {
+        "title": "Everything You Need to Know About Gastroscopy"
+      },
+      "refluxCauses": {
+        "title": "Causes and Treatment of Acid Reflux"
+      },
+      "colonoscopyTips": {
+        "title": "Tips After a Colonoscopy"
+      }
     }
   },
   "reviews": {
@@ -728,7 +734,9 @@
       "whatsappLabel": "Chat on WhatsApp",
       "emailLabel": "Email",
       "addressLabel": "Clinic Address",
-      "followUsLabel": "Follow Us"
+      "followUsLabel": "Follow Us",
+      "viewOnMapLabel": "Open in Google Maps",
+      "branchesLabel": "Our Branches"
     },
     "cta": {
       "title": "Still Not Sure?",

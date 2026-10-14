@@ -1,11 +1,17 @@
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa6";
 import { siteConfig } from "@/lib/site-config";
 import type { FooterData, SiteSettings } from "@/lib/cms/layout";
 import { SiteLogo } from "@/components/ui/SiteLogo";
 import { SmartLink } from "@/components/ui/SmartLink";
 import { socialIcon } from "@/components/ui/socialIcons";
+import type { DynamicItem } from "@/lib/supabase/types";
+
+function mapsSearchUrl(address: string) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+}
 
 const columnClass: Record<number, string> = {
   1: "md:grid-cols-1",
@@ -27,16 +33,25 @@ function ColumnHeading({ children }: { children: React.ReactNode }) {
  * global settings. Every field falls back to the built-in default, and a part
  * the admin hid (`null`) is simply not rendered.
  */
-export function Footer({ data, settings }: { data: FooterData | null; settings: SiteSettings }) {
+export function Footer({
+  data,
+  settings,
+  locations = [],
+}: {
+  data: FooterData | null;
+  settings: SiteSettings;
+  locations?: DynamicItem[];
+}) {
   const t = useTranslations("nav");
   const tSite = useTranslations("site");
   const tFooter = useTranslations("footer");
+  const locale = useLocale();
 
   const about: FooterData["about"] = data ? data.about : {};
   const quickLinks: FooterData["quickLinks"] = data ? data.quickLinks : {};
   const social: FooterData["social"] = data
     ? data.social
-    : { showPhone: true, showEmail: true, showAddress: true };
+    : { showPhone: true, showWhatsapp: true, showEmail: true, showAddress: true };
   const bottom: FooterData["bottom"] = data
     ? data.bottom
     : { credit: { name: "Transition", url: "https://transitioneg.com/", logoUrl: "/images/logo-01.png" } };
@@ -110,13 +125,27 @@ export function Footer({ data, settings }: { data: FooterData | null; settings: 
                   })}
                 </div>
 
-                {(social.showPhone || social.showEmail || social.showAddress) && (
+                {(social.showPhone || social.showWhatsapp || social.showEmail || social.showAddress) && (
                   <ul className="mt-6 space-y-3">
                     {social.showPhone && (
                       <li className="flex items-center justify-center gap-2 text-sm text-brand-ink-muted">
                         <Phone className="size-4 shrink-0 text-brand-rose" />
                         <a href={`tel:${settings.phone}`} dir="ltr" className="transition-colors hover:text-brand-rose">
                           {settings.phoneDisplay}
+                        </a>
+                      </li>
+                    )}
+                    {social.showWhatsapp && (
+                      <li className="flex items-center justify-center gap-2 text-sm text-brand-ink-muted">
+                        <FaWhatsapp className="size-4 shrink-0 text-brand-whatsapp" />
+                        <a
+                          href={settings.whatsapp}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          dir="ltr"
+                          className="transition-colors hover:text-brand-rose"
+                        >
+                          {settings.whatsappDisplay}
                         </a>
                       </li>
                     )}
@@ -132,12 +161,34 @@ export function Footer({ data, settings }: { data: FooterData | null; settings: 
                         </a>
                       </li>
                     )}
-                    {social.showAddress && (
-                      <li className="flex items-start justify-center gap-2 text-sm text-brand-ink-muted">
-                        <MapPin className="mt-0.5 size-4 shrink-0 text-brand-rose" />
-                        <span>{tSite("address")}</span>
-                      </li>
-                    )}
+                    {social.showAddress &&
+                      (locations.length > 0 ? (
+                        locations.map((branch) => {
+                          const name = (locale === "ar" ? branch.title_ar : branch.title_en) || branch.title_ar;
+                          const address =
+                            (locale === "ar" ? branch.description_ar : branch.description_en) ||
+                            branch.description_ar;
+                          return (
+                            <li key={branch.id} className="flex items-start justify-center gap-2 text-sm text-brand-ink-muted">
+                              <MapPin className="mt-0.5 size-4 shrink-0 text-brand-rose" />
+                              <a
+                                href={branch.link_url || mapsSearchUrl(address)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="transition-colors hover:text-brand-rose"
+                              >
+                                <span className="font-bold text-brand-ink">{name}</span>
+                                <span className="block">{address}</span>
+                              </a>
+                            </li>
+                          );
+                        })
+                      ) : (
+                        <li className="flex items-start justify-center gap-2 text-sm text-brand-ink-muted">
+                          <MapPin className="mt-0.5 size-4 shrink-0 text-brand-rose" />
+                          <span>{tSite("address")}</span>
+                        </li>
+                      ))}
                   </ul>
                 )}
               </div>

@@ -103,7 +103,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   const t = await getTranslations({ locale, namespace: "site" });
   const dir = locale === "ar" ? "rtl" : "ltr";
-  const { settings, navbar, footer } = await getLayoutData(locale);
+  const { settings, navbar, footer, locations } = await getLayoutData(locale);
   const siteUrl = await getSiteUrl();
 
   const jsonLd = {
@@ -144,7 +144,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             <ScrollToTop />
             <Navbar data={navbar} />
             <main className="flex-1">{children}</main>
-            <Footer data={footer} settings={settings} />
+            <Footer data={footer} settings={settings} locations={locations} />
             <div className="fixed bottom-4 left-4 z-40 flex flex-col items-center gap-2.5 sm:bottom-6 sm:left-6 sm:gap-3">
               <WhatsAppButton />
               <CallButton />
