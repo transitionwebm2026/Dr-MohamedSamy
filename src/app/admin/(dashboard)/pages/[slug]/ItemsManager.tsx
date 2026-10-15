@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { ArrowDown, ArrowUp, ChevronDown, Plus, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { TextField, TextAreaField } from "@/components/admin/FormField";
@@ -16,6 +16,7 @@ import {
 } from "@/components/admin/itemFieldConfig";
 import type { DynamicItem } from "@/lib/supabase/types";
 import { deleteItem, moveItem, upsertItem } from "./actions";
+import { useRefresh } from "./refresh-context";
 
 type Localized = { ar: string; en: string };
 
@@ -159,10 +160,15 @@ function ItemForm({
   slug: string;
   item: DynamicItem | null;
 }) {
+  const refresh = useRefresh();
   const action = upsertItem.bind(null, sectionId, slug, item?.id ?? null);
   const [state, formAction] = useActionState(action, undefined);
   const isVideoSection = videoItemSections.has(sectionKey);
   const isLinkSection = linkItemSections.has(sectionKey);
+
+  useEffect(() => {
+    if (state?.ok) refresh();
+  }, [state, refresh]);
 
   return (
     <form action={formAction} className="space-y-3 p-4">
@@ -231,6 +237,7 @@ function ItemRow({
   items: DynamicItem[];
 }) {
   const [open, setOpen] = useState(false);
+  const refresh = useRefresh();
 
   return (
     <div className="glass rounded-xl">
@@ -246,14 +253,14 @@ function ItemRow({
         <div className="flex items-center gap-1">
           <button
             type="button"
-            onClick={() => moveItem(slug, items, item.id, "up")}
+            onClick={() => void moveItem(slug, items, item.id, "up").then(refresh)}
             className="flex size-7 items-center justify-center rounded-lg text-brand-ink-muted hover:bg-white/10"
           >
             <ArrowUp className="size-3.5" />
           </button>
           <button
             type="button"
-            onClick={() => moveItem(slug, items, item.id, "down")}
+            onClick={() => void moveItem(slug, items, item.id, "down").then(refresh)}
             className="flex size-7 items-center justify-center rounded-lg text-brand-ink-muted hover:bg-white/10"
           >
             <ArrowDown className="size-3.5" />
@@ -261,7 +268,7 @@ function ItemRow({
           <button
             type="button"
             onClick={() => {
-              if (confirm("متأكد من حذف هذا العنصر؟")) void deleteItem(item.id, slug);
+              if (confirm("متأكد من حذف هذا العنصر؟")) void deleteItem(item.id).then(refresh);
             }}
             className="flex size-7 items-center justify-center rounded-lg text-red-400 hover:bg-red-500/10"
           >

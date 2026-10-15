@@ -1,13 +1,6 @@
-"use server";
-
-import { revalidatePath } from "next/cache";
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@/lib/supabase/client";
 
 export type ActionState = { ok?: boolean; error?: string } | undefined;
-
-async function revalidate(slug: string) {
-  revalidatePath(`/admin/pages/${slug}`);
-}
 
 // ---------------------------------------------------------------------------
 // Sections
@@ -15,11 +8,11 @@ async function revalidate(slug: string) {
 
 export async function updateSection(
   sectionId: string,
-  slug: string,
+  _slug: string,
   _prevState: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
-  const supabase = await createClient();
+  const supabase = createClient();
 
   let content: Record<string, unknown> = {};
   try {
@@ -39,12 +32,11 @@ export async function updateSection(
     .eq("id", sectionId);
 
   if (error) return { error: error.message };
-  await revalidate(slug);
   return { ok: true };
 }
 
-export async function createSection(pageId: string, slug: string, formData: FormData): Promise<void> {
-  const supabase = await createClient();
+export async function createSection(pageId: string, _slug: string, formData: FormData): Promise<void> {
+  const supabase = createClient();
   const sectionKey = String(formData.get("section_key") ?? "").trim();
   if (!sectionKey) return;
 
@@ -64,23 +56,20 @@ export async function createSection(pageId: string, slug: string, formData: Form
     order_index: (existing?.order_index ?? -1) + 1,
     content: {},
   });
-
-  await revalidate(slug);
 }
 
-export async function deleteSection(sectionId: string, slug: string): Promise<void> {
-  const supabase = await createClient();
+export async function deleteSection(sectionId: string): Promise<void> {
+  const supabase = createClient();
   await supabase.from("page_sections").delete().eq("id", sectionId);
-  await revalidate(slug);
 }
 
 export async function moveSection(
-  slug: string,
+  _slug: string,
   sections: { id: string; order_index: number }[],
   sectionId: string,
   direction: "up" | "down",
 ): Promise<void> {
-  const supabase = await createClient();
+  const supabase = createClient();
   const sorted = [...sections].sort((a, b) => a.order_index - b.order_index);
   const i = sorted.findIndex((s) => s.id === sectionId);
   const j = direction === "up" ? i - 1 : i + 1;
@@ -90,8 +79,6 @@ export async function moveSection(
     supabase.from("page_sections").update({ order_index: sorted[j].order_index }).eq("id", sorted[i].id),
     supabase.from("page_sections").update({ order_index: sorted[i].order_index }).eq("id", sorted[j].id),
   ]);
-
-  await revalidate(slug);
 }
 
 // ---------------------------------------------------------------------------
@@ -100,12 +87,12 @@ export async function moveSection(
 
 export async function upsertItem(
   sectionId: string,
-  slug: string,
+  _slug: string,
   itemId: string | null,
   _prevState: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
-  const supabase = await createClient();
+  const supabase = createClient();
 
   let extra: Record<string, unknown> = {};
   try {
@@ -134,23 +121,21 @@ export async function upsertItem(
         .insert({ ...payload, order_index: Date.now() });
 
   if (error) return { error: error.message };
-  await revalidate(slug);
   return { ok: true };
 }
 
-export async function deleteItem(itemId: string, slug: string): Promise<void> {
-  const supabase = await createClient();
+export async function deleteItem(itemId: string): Promise<void> {
+  const supabase = createClient();
   await supabase.from("dynamic_items_collections").delete().eq("id", itemId);
-  await revalidate(slug);
 }
 
 export async function moveItem(
-  slug: string,
+  _slug: string,
   items: { id: string; order_index: number }[],
   itemId: string,
   direction: "up" | "down",
 ): Promise<void> {
-  const supabase = await createClient();
+  const supabase = createClient();
   const sorted = [...items].sort((a, b) => a.order_index - b.order_index);
   const i = sorted.findIndex((it) => it.id === itemId);
   const j = direction === "up" ? i - 1 : i + 1;
@@ -160,6 +145,4 @@ export async function moveItem(
     supabase.from("dynamic_items_collections").update({ order_index: sorted[j].order_index }).eq("id", sorted[i].id),
     supabase.from("dynamic_items_collections").update({ order_index: sorted[i].order_index }).eq("id", sorted[j].id),
   ]);
-
-  await revalidate(slug);
 }

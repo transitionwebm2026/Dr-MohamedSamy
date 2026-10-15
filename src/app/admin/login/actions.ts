@@ -1,20 +1,22 @@
-"use server";
+import { createClient } from "@/lib/supabase/client";
 
-import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+export type SignInState = { error?: string; ok?: boolean } | undefined;
 
-export type SignInState = { error?: string } | undefined;
-
+/**
+ * Runs in the browser (no server to host a Server Action under static
+ * export) — the admin dashboard's whole auth model is the Supabase session
+ * this creates, refreshed automatically by the browser client itself.
+ */
 export async function signIn(_prevState: SignInState, formData: FormData): Promise<SignInState> {
   const email = String(formData.get("email") ?? "");
   const password = String(formData.get("password") ?? "");
 
-  const supabase = await createClient();
+  const supabase = createClient();
   const { error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error) {
     return { error: "البريد الإلكتروني أو كلمة المرور غير صحيحة" };
   }
 
-  redirect("/admin");
+  return { ok: true };
 }

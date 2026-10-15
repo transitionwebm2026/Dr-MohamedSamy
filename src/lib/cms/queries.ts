@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@/lib/supabase/static";
 import type { DynamicItem, GlobalSettings, PageSection } from "@/lib/supabase/types";
 
 /**

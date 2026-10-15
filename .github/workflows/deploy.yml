@@ -1,0 +1,54 @@
+name: Build and deploy static export to Hostinger
+
+# Three ways this runs:
+# 1. Push to main — every merged code change redeploys.
+# 2. Manual "Run workflow" button in the GitHub Actions tab.
+# 3. repository_dispatch (type: cms-content-updated) — called by a Supabase
+#    Database Webhook whenever an admin edits content, so the live static
+#    site stays in sync with the dashboard without a manual rebuild. See
+#    docs/static-export-deploy.md for how to wire that webhook up.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+  repository_dispatch:
+    types: [cms-content-updated]
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static export
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+        run: npm run build
+
+      - name: Deploy ./out to Hostinger via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.HOSTINGER_FTP_SERVER }}
+          username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
+          password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./out/
+          # Hostinger's static-site document root for most shared plans —
+          # adjust if your hPanel shows a different path.
+          server-dir: ./public_html/

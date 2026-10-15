@@ -1,9 +1,23 @@
-import { createClient } from "@/lib/supabase/server";
-import { GlobalSettingsForm } from "./GlobalSettingsForm";
+"use client";
 
-export default async function AdminSettingsPage() {
-  const supabase = await createClient();
-  const { data: settings } = await supabase.from("global_settings").select("*").eq("id", 1).single();
+import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
+import { GlobalSettingsForm } from "./GlobalSettingsForm";
+import type { GlobalSettings } from "@/lib/supabase/types";
+
+export default function AdminSettingsPage() {
+  const [settings, setSettings] = useState<GlobalSettings | null | undefined>(undefined);
+
+  useEffect(() => {
+    createClient()
+      .from("global_settings")
+      .select("*")
+      .eq("id", 1)
+      .single()
+      .then(({ data }) => setSettings(data ?? null));
+  }, []);
+
+  if (settings === undefined) return null;
 
   if (!settings) {
     return <p className="text-brand-ink-muted">تعذّر تحميل الإعدادات.</p>;
