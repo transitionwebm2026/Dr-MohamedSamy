@@ -60,7 +60,10 @@ export const itemFieldConfig: Record<string, ExtraFieldConfig[]> = {
     { type: "bilingual", key: "highlight", label: "عنوان مختصر (اختياري)" },
     { type: "bilingual", key: "doctorResponse", label: "رد الدكتور (اختياري)", multiline: true },
   ],
-  locations: [{ type: "text", key: "phone", label: "رقم الهاتف (مع كود الدولة، مثال: +201234567890)" }],
+  locations: [
+    { type: "text", key: "phone", label: "رقم الهاتف (مع كود الدولة، مثال: +201234567890)" },
+    { type: "bilingual", key: "hours", label: "مواعيد العمل" },
+  ],
   articles_section: [
     {
       type: "select",

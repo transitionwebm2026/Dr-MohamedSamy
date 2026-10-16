@@ -14,3 +14,15 @@ export function extraString(item: DynamicItem | undefined, field: string, fallba
   const v = item?.extra?.[field];
   return typeof v === "string" && v.length > 0 ? v : fallback;
 }
+
+/** Reads a bilingual `{ ar, en }` field out of an item's `extra` JSON for the given locale. */
+export function extraLocalized(
+  item: DynamicItem | undefined,
+  field: string,
+  locale: string,
+  fallback = "",
+): string {
+  const v = item?.extra?.[field] as { ar?: string; en?: string } | undefined;
+  const value = locale === "ar" ? v?.ar : v?.en;
+  return typeof value === "string" && value.length > 0 ? value : fallback;
+}

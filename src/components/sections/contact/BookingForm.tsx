@@ -2,17 +2,25 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
-import { CalendarDays, MessageSquare, Phone, User } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { CalendarDays, Clock, MapPin, MessageSquare, Phone, User } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { useSiteSettings } from "@/components/layout/SiteSettingsProvider";
+import { extraLocalized, extraString } from "@/lib/cms/helpers";
+import type { DynamicItem } from "@/lib/supabase/types";
 
 const fieldClass =
   "w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-brand-ink placeholder:text-brand-ink-muted/70 outline-none transition-colors focus:border-brand-rose/60";
 
-export function BookingForm() {
+/** "+201557800164" -> "https://wa.me/201557800164" */
+function branchWhatsapp(phone: string): string {
+  return `https://wa.me/${phone.replace(/\D/g, "")}`;
+}
+
+export function BookingForm({ locations = [] }: { locations?: DynamicItem[] }) {
   const t = useTranslations("contactPage.form");
+  const locale = useLocale();
   const { whatsapp } = useSiteSettings();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -20,11 +28,21 @@ export function BookingForm() {
   const [date, setDate] = useState("");
   const [notes, setNotes] = useState("");
 
+  const branchOptions = locations.map((item) => ({
+    value: item.item_key ?? item.id,
+    label: (locale === "ar" ? item.title_ar : item.title_en) || item.title_ar,
+    whatsapp: branchWhatsapp(extraString(item, "phone", "")),
+    hours: extraLocalized(item, "hours", locale),
+  }));
+  const defaultBranch = branchOptions.find((b) => b.value === "janaklis")?.value ?? branchOptions[0]?.value ?? "";
+  const [branch, setBranch] = useState(defaultBranch);
+  const selectedBranch = branchOptions.find((b) => b.value === branch);
+
   const serviceOptions = [
-    { value: "general", label: t("serviceOptions.general") },
-    { value: "endoscopy", label: t("serviceOptions.endoscopy") },
-    { value: "liver", label: t("serviceOptions.liver") },
-    { value: "other", label: t("serviceOptions.other") },
+    { value: "consultation", label: t("serviceOptions.consultation") },
+    { value: "checkup", label: t("serviceOptions.checkup") },
+    { value: "gastroscopy", label: t("serviceOptions.gastroscopy") },
+    { value: "colonoscopy", label: t("serviceOptions.colonoscopy") },
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -32,17 +50,21 @@ export function BookingForm() {
 
     const serviceLabel = serviceOptions.find((o) => o.value === service)?.label ?? t("notSpecified");
 
-    const message = [
+    const lines = [
       `*${t("messageTitle")}*`,
       "",
       `${t("nameLabel")}: ${name}`,
       `${t("phoneLabel")}: ${phone}`,
       `${t("serviceLabel")}: ${serviceLabel}`,
+    ];
+    if (selectedBranch) lines.push(`${t("branchLabel")}: ${selectedBranch.label}`);
+    lines.push(
       `${t("dateLabel")}: ${date || t("notSpecified")}`,
       `${t("notesLabel")}: ${notes || t("noNotes")}`,
-    ].join("\n");
+    );
 
-    const url = `${whatsapp}?text=${encodeURIComponent(message)}`;
+    const destination = selectedBranch?.whatsapp || whatsapp;
+    const url = `${destination}?text=${encodeURIComponent(lines.join("\n"))}`;
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
@@ -117,6 +139,36 @@ export function BookingForm() {
               ))}
             </select>
           </div>
+
+          {branchOptions.length > 0 && (
+            <div>
+              <label className="mb-2 flex items-center gap-1.5 text-sm font-bold text-brand-ink">
+                <MapPin className="size-4 text-brand-rose" />
+                {t("branchLabel")}
+              </label>
+              <select
+                required
+                value={branch}
+                onChange={(e) => setBranch(e.target.value)}
+                className={fieldClass}
+              >
+                <option value="" disabled>
+                  {t("branchPlaceholder")}
+                </option>
+                {branchOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              {selectedBranch?.hours && (
+                <p className="mt-2 flex items-center gap-1.5 text-xs font-semibold text-brand-ink-muted">
+                  <Clock className="size-3.5 shrink-0 text-brand-rose" />
+                  {t("branchHoursPrefix")}: {selectedBranch.hours}
+                </p>
+              )}
+            </div>
+          )}
 
           <div>
             <label className="mb-2 flex items-center gap-1.5 text-sm font-bold text-brand-ink">

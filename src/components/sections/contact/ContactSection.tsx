@@ -17,7 +17,7 @@ export function ContactSection({ locations = [] }: { locations?: DynamicItem[] }
         <SectionHeader eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
 
         <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-14">
-          <BookingForm />
+          <BookingForm locations={locations} />
           <BranchLocations items={locations} />
         </div>
       </div>

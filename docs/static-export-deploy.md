@@ -1,10 +1,26 @@
-# Static export + Hostinger deploy
+# Static export + deploy
 
-The site now builds as a static export (`output: 'export'` in `next.config.mjs`) — `npm run build` produces a plain `/out` folder of HTML/CSS/JS with no Node server required at runtime, which is what lets it run on a Hostinger **Static Website** plan instead of a webapp slot.
+The site now builds as a static export (`output: 'export'` in `next.config.mjs`) — `npm run build` produces a plain `/out` folder of HTML/CSS/JS with no Node server required at runtime. That's what will let it run on a Hostinger **Static Website** plan later; today it's still deployed on Vercel, which also supports static exports natively.
 
 ## What changed, in one paragraph
 
 Every public page is prerendered **at build time** from Supabase, not on each request — so a dashboard edit needs a rebuild+redeploy to appear live (automated below, not instant). The admin dashboard itself (`/admin/*`) is now a client-side app: it talks to Supabase directly from the browser (same as the image uploader already did), gated by a client-side session check instead of server middleware. Security still comes from Supabase Row Level Security, exactly as it did before — writes were already going through the authenticated user's own Supabase session, never the service-role key, so no RLS policies needed to change.
+
+## Right now, on Vercel: auto-rebuild when the admin edits content
+
+While the site is still on Vercel, this is simpler than the Hostinger path below — Vercel already builds from git, so all that's needed is something to tell it "rebuild now."
+
+1. **Vercel Dashboard → the project → Settings → Git → Deploy Hooks** → create one named e.g. `cms-update`, targeting the `main` branch. Copy the URL it gives you (looks like `https://api.vercel.com/v1/integrations/deploy/...`).
+2. **Supabase Dashboard → Database → Webhooks → Create a new webhook**, once for each of these tables: `page_sections`, `dynamic_items_collections`, `global_settings`. For each:
+   - Events: `INSERT`, `UPDATE`, `DELETE`
+   - Type: HTTP Request
+   - Method: `POST`
+   - URL: the Deploy Hook URL from step 1
+   - No headers or body needed — Vercel treats any POST to that URL as "rebuild."
+
+From then on, saving anything in the dashboard fires the webhook → Vercel rebuilds `main` → the live Vercel domain gets the new static HTML. Expect roughly 1–2 minutes between saving and the change going live, not instant.
+
+## Later, moving to Hostinger
 
 ## 1. GitHub repository secrets
 

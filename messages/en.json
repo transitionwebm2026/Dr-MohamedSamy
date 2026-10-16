@@ -713,11 +713,14 @@
       "serviceLabel": "Consultation Type",
       "servicePlaceholder": "Select consultation type",
       "serviceOptions": {
-        "general": "General Consultation",
-        "endoscopy": "Gastroscopy or Colonoscopy",
-        "liver": "Liver Disease Follow-up",
-        "other": "Other"
+        "consultation": "Consultation",
+        "checkup": "Check-up",
+        "gastroscopy": "Gastroscopy (Upper Endoscopy)",
+        "colonoscopy": "Colonoscopy"
       },
+      "branchLabel": "Branch",
+      "branchPlaceholder": "Choose your nearest branch",
+      "branchHoursPrefix": "Working hours",
       "dateLabel": "Preferred Date",
       "notesLabel": "Additional Details or Symptoms",
       "notesPlaceholder": "Share any details that help us understand your case better (optional)",
@@ -736,7 +739,8 @@
       "addressLabel": "Clinic Address",
       "followUsLabel": "Follow Us",
       "viewOnMapLabel": "Open in Google Maps",
-      "branchesLabel": "Our Branches"
+      "branchesLabel": "Our Branches",
+      "workingHoursLabel": "Working hours"
     },
     "cta": {
       "title": "Still Not Sure?",

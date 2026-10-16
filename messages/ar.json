@@ -713,11 +713,14 @@
       "serviceLabel": "نوع الاستشارة",
       "servicePlaceholder": "اختر نوع الاستشارة",
       "serviceOptions": {
-        "general": "استشارة عامة",
-        "endoscopy": "منظار المعدة أو القولون",
-        "liver": "متابعة أمراض الكبد",
-        "other": "أخرى"
+        "consultation": "استشارة",
+        "checkup": "كشف",
+        "gastroscopy": "منظار معدة",
+        "colonoscopy": "منظار قولون"
       },
+      "branchLabel": "العيادة",
+      "branchPlaceholder": "اختر الفرع الأقرب ليك",
+      "branchHoursPrefix": "مواعيد العمل",
       "dateLabel": "الموعد المفضل",
       "notesLabel": "تفاصيل إضافية أو أعراض",
       "notesPlaceholder": "اكتب أي تفاصيل تساعدنا نفهم حالتك أكتر (اختياري)",
@@ -736,7 +739,8 @@
       "addressLabel": "عنوان العيادة",
       "followUsLabel": "تابعنا على",
       "viewOnMapLabel": "فتح في خرائط جوجل",
-      "branchesLabel": "فروعنا"
+      "branchesLabel": "فروعنا",
+      "workingHoursLabel": "مواعيد العمل"
     },
     "cta": {
       "title": "لسه متردد؟",
