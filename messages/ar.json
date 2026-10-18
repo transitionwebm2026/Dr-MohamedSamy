@@ -713,15 +713,14 @@
       "serviceLabel": "نوع الاستشارة",
       "servicePlaceholder": "اختر نوع الاستشارة",
       "serviceOptions": {
-        "consultation": "استشارة",
         "checkup": "كشف",
-        "gastroscopy": "منظار معدة",
-        "colonoscopy": "منظار قولون"
+        "consultation": "استشارة",
+        "endoscopy": "مناظير جهاز هضمي"
       },
       "branchLabel": "العيادة",
       "branchPlaceholder": "اختر الفرع الأقرب ليك",
-      "branchHoursPrefix": "مواعيد العمل",
       "dateLabel": "الموعد المفضل",
+      "datePlaceholder": "اختر الفترة المناسبة",
       "notesLabel": "تفاصيل إضافية أو أعراض",
       "notesPlaceholder": "اكتب أي تفاصيل تساعدنا نفهم حالتك أكتر (اختياري)",
       "submitBtn": "إرسال عبر واتساب",

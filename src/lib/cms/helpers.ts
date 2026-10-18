@@ -26,3 +26,10 @@ export function extraLocalized(
   const value = locale === "ar" ? v?.ar : v?.en;
   return typeof value === "string" && value.length > 0 ? value : fallback;
 }
+
+/** Reads a bilingual list `{ ar: string[], en: string[] }` field out of an item's `extra` JSON for the given locale. */
+export function extraLocalizedList(item: DynamicItem | undefined, field: string, locale: string): string[] {
+  const v = item?.extra?.[field] as { ar?: string[]; en?: string[] } | undefined;
+  const value = locale === "ar" ? v?.ar : v?.en;
+  return Array.isArray(value) ? value.filter((s) => typeof s === "string" && s.length > 0) : [];
+}

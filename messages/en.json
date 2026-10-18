@@ -713,15 +713,14 @@
       "serviceLabel": "Consultation Type",
       "servicePlaceholder": "Select consultation type",
       "serviceOptions": {
-        "consultation": "Consultation",
         "checkup": "Check-up",
-        "gastroscopy": "Gastroscopy (Upper Endoscopy)",
-        "colonoscopy": "Colonoscopy"
+        "consultation": "Consultation",
+        "endoscopy": "Digestive System Endoscopy"
       },
       "branchLabel": "Branch",
       "branchPlaceholder": "Choose your nearest branch",
-      "branchHoursPrefix": "Working hours",
-      "dateLabel": "Preferred Date",
+      "dateLabel": "Preferred Time",
+      "datePlaceholder": "Choose a suitable time",
       "notesLabel": "Additional Details or Symptoms",
       "notesPlaceholder": "Share any details that help us understand your case better (optional)",
       "submitBtn": "Send via WhatsApp",

@@ -3,15 +3,21 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
-import { CalendarDays, Clock, MapPin, MessageSquare, Phone, User } from "lucide-react";
+import { Clock, MapPin, MessageSquare, Phone, User } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { useSiteSettings } from "@/components/layout/SiteSettingsProvider";
-import { extraLocalized, extraString } from "@/lib/cms/helpers";
+import { extraLocalizedList, extraString } from "@/lib/cms/helpers";
 import type { DynamicItem } from "@/lib/supabase/types";
 
 const fieldClass =
   "w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-brand-ink placeholder:text-brand-ink-muted/70 outline-none transition-colors focus:border-brand-rose/60";
+
+// Native <option> popups ignore most page styling (they're OS-rendered), so
+// without an explicit opaque background a light theme/browser combo can
+// render this dark site's light option text unreadable — seen specifically
+// on desktop/laptop Chrome and Edge.
+const optionClass = "bg-brand-surface text-brand-ink";
 
 /** "+201557800164" -> "https://wa.me/201557800164" */
 function branchWhatsapp(phone: string): string {
@@ -32,17 +38,21 @@ export function BookingForm({ locations = [] }: { locations?: DynamicItem[] }) {
     value: item.item_key ?? item.id,
     label: (locale === "ar" ? item.title_ar : item.title_en) || item.title_ar,
     whatsapp: branchWhatsapp(extraString(item, "phone", "")),
-    hours: extraLocalized(item, "hours", locale),
+    hours: extraLocalizedList(item, "hours", locale),
   }));
   const defaultBranch = branchOptions.find((b) => b.value === "janaklis")?.value ?? branchOptions[0]?.value ?? "";
   const [branch, setBranch] = useState(defaultBranch);
   const selectedBranch = branchOptions.find((b) => b.value === branch);
 
+  const handleBranchChange = (value: string) => {
+    setBranch(value);
+    setDate(""); // the previous slot belongs to the old branch's schedule
+  };
+
   const serviceOptions = [
-    { value: "consultation", label: t("serviceOptions.consultation") },
     { value: "checkup", label: t("serviceOptions.checkup") },
-    { value: "gastroscopy", label: t("serviceOptions.gastroscopy") },
-    { value: "colonoscopy", label: t("serviceOptions.colonoscopy") },
+    { value: "consultation", label: t("serviceOptions.consultation") },
+    { value: "endoscopy", label: t("serviceOptions.endoscopy") },
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -129,11 +139,11 @@ export function BookingForm({ locations = [] }: { locations?: DynamicItem[] }) {
               onChange={(e) => setService(e.target.value)}
               className={fieldClass}
             >
-              <option value="" disabled>
+              <option value="" disabled className={optionClass}>
                 {t("servicePlaceholder")}
               </option>
               {serviceOptions.map((option) => (
-                <option key={option.value} value={option.value}>
+                <option key={option.value} value={option.value} className={optionClass}>
                   {option.label}
                 </option>
               ))}
@@ -149,38 +159,36 @@ export function BookingForm({ locations = [] }: { locations?: DynamicItem[] }) {
               <select
                 required
                 value={branch}
-                onChange={(e) => setBranch(e.target.value)}
+                onChange={(e) => handleBranchChange(e.target.value)}
                 className={fieldClass}
               >
-                <option value="" disabled>
+                <option value="" disabled className={optionClass}>
                   {t("branchPlaceholder")}
                 </option>
                 {branchOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
+                  <option key={option.value} value={option.value} className={optionClass}>
                     {option.label}
                   </option>
                 ))}
               </select>
-              {selectedBranch?.hours && (
-                <p className="mt-2 flex items-center gap-1.5 text-xs font-semibold text-brand-ink-muted">
-                  <Clock className="size-3.5 shrink-0 text-brand-rose" />
-                  {t("branchHoursPrefix")}: {selectedBranch.hours}
-                </p>
-              )}
             </div>
           )}
 
           <div>
             <label className="mb-2 flex items-center gap-1.5 text-sm font-bold text-brand-ink">
-              <CalendarDays className="size-4 text-brand-rose" />
+              <Clock className="size-4 text-brand-rose" />
               {t("dateLabel")}
             </label>
-            <input
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              className={fieldClass}
-            />
+            <select value={date} onChange={(e) => setDate(e.target.value)} className={fieldClass}>
+              <option value="" className={optionClass}>
+                {t("datePlaceholder")}
+              </option>
+              {(selectedBranch?.hours ?? []).map((slot) => (
+                <option key={slot} value={slot} className={optionClass}>
+                  {slot}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div>

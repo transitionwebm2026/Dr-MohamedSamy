@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 import { Clock, ExternalLink, MapPin, Phone } from "lucide-react";
 import { GlassCard } from "@/components/ui/GlassCard";
-import { extraLocalized, extraString } from "@/lib/cms/helpers";
+import { extraLocalizedList, extraString } from "@/lib/cms/helpers";
 import type { DynamicItem } from "@/lib/supabase/types";
 
 function mapsSearchUrl(address: string) {
@@ -28,7 +28,7 @@ export function BranchLocations({ items = [] }: { items?: DynamicItem[] }) {
         const name = (locale === "ar" ? branch.title_ar : branch.title_en) || branch.title_ar;
         const address = (locale === "ar" ? branch.description_ar : branch.description_en) || branch.description_ar;
         const phone = extraString(branch, "phone", "");
-        const hours = extraLocalized(branch, "hours", locale);
+        const hours = extraLocalizedList(branch, "hours", locale);
         const mapHref = branch.link_url || mapsSearchUrl(address);
 
         return (
@@ -49,10 +49,10 @@ export function BranchLocations({ items = [] }: { items?: DynamicItem[] }) {
                   <div>
                     <p className="text-sm font-bold text-brand-ink">{name}</p>
                     <p className="mt-0.5 text-sm leading-relaxed text-brand-ink-muted">{address}</p>
-                    {hours && (
+                    {hours.length > 0 && (
                       <p className="mt-1.5 flex items-center gap-1.5 text-xs font-semibold text-brand-ink-muted">
                         <Clock className="size-3.5 shrink-0 text-brand-rose" />
-                        {hours}
+                        {hours.join(" · ")}
                       </p>
                     )}
                   </div>

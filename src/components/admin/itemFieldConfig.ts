@@ -62,7 +62,7 @@ export const itemFieldConfig: Record<string, ExtraFieldConfig[]> = {
   ],
   locations: [
     { type: "text", key: "phone", label: "رقم الهاتف (مع كود الدولة، مثال: +201234567890)" },
-    { type: "bilingual", key: "hours", label: "مواعيد العمل" },
+    { type: "bilingualList", key: "hours", label: "أيام ومواعيد العمل (كل يوم سطر مستقل، مثال: السبت: 6-9 م، يظهر كخيار منفصل في فورم الحجز)" },
   ],
   articles_section: [
     {
