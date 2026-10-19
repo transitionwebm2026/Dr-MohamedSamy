@@ -52,3 +52,13 @@ jobs:
           # Hostinger's static-site document root for most shared plans —
           # adjust if your hPanel shows a different path.
           server-dir: ./public_html/
+          # Next.js names each build's _next/static/<hash>/ folder randomly,
+          # so every deploy needs the previous one's hash folder removed. An
+          # earlier failed run (FTPS data-channel reset mid-transfer) left the
+          # action's own server-side state file out of sync with what's
+          # actually there, which made incremental cleanup fail with "550 No
+          # such file" for a folder that was already gone. Wiping the server
+          # first sidesteps that whole class of drift — the site is a few MB,
+          # so re-uploading everything each time costs a bit of deploy time,
+          # not correctness.
+          dangerous-clean-slate: true
