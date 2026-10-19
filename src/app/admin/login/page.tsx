@@ -1,10 +1,8 @@
 "use client";
 
-import { useActionState, useEffect, useState } from "react";
+import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
-import { useRouter } from "next/navigation";
 import { Lock, Mail } from "lucide-react";
-import { createClient } from "@/lib/supabase/client";
 import { signIn } from "./actions";
 
 function SubmitButton() {
@@ -22,25 +20,7 @@ function SubmitButton() {
 }
 
 export default function AdminLoginPage() {
-  const router = useRouter();
   const [state, formAction] = useActionState(signIn, undefined);
-  const [checkingSession, setCheckingSession] = useState(true);
-
-  // Already signed in (e.g. a bookmarked /admin/login) — there's no server
-  // gate anymore, so this page itself has to send them onward.
-  useEffect(() => {
-    const supabase = createClient();
-    supabase.auth.getUser().then(({ data }) => {
-      if (data.user) router.replace("/admin");
-      else setCheckingSession(false);
-    });
-  }, [router]);
-
-  useEffect(() => {
-    if (state?.ok) router.replace("/admin");
-  }, [state, router]);
-
-  if (checkingSession) return null;
 
   return (
     <main className="flex min-h-screen items-center justify-center px-4">

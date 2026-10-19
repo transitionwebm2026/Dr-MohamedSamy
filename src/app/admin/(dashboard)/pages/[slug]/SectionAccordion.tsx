@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useState } from "react";
 import { ArrowDown, ArrowUp, ChevronDown, EyeOff, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { TextField } from "@/components/admin/FormField";
@@ -10,7 +10,6 @@ import { linkItemSections } from "@/components/admin/itemFieldConfig";
 import type { DynamicItem, PageSection } from "@/lib/supabase/types";
 import { deleteSection, moveSection, updateSection } from "./actions";
 import { ItemsManager } from "./ItemsManager";
-import { useRefresh } from "./refresh-context";
 
 export function SectionAccordion({
   section,
@@ -24,15 +23,10 @@ export function SectionAccordion({
   sections: { id: string; order_index: number }[];
 }) {
   const [open, setOpen] = useState(false);
-  const refresh = useRefresh();
   // The navbar/footer sections are plain field groups; only their link lists hold items.
   const hasItems = !["navbar", "footer"].includes(slug) || linkItemSections.has(section.section_key);
   const action = updateSection.bind(null, section.id, slug);
   const [state, formAction] = useActionState(action, undefined);
-
-  useEffect(() => {
-    if (state?.ok) refresh();
-  }, [state, refresh]);
 
   return (
     <div className="glass-strong rounded-2xl">
@@ -50,14 +44,14 @@ export function SectionAccordion({
         <div className="flex items-center gap-1">
           <button
             type="button"
-            onClick={() => void moveSection(slug, sections, section.id, "up").then(refresh)}
+            onClick={() => void moveSection(slug, sections, section.id, "up")}
             className="flex size-8 items-center justify-center rounded-lg text-brand-ink-muted hover:bg-white/10"
           >
             <ArrowUp className="size-4" />
           </button>
           <button
             type="button"
-            onClick={() => void moveSection(slug, sections, section.id, "down").then(refresh)}
+            onClick={() => void moveSection(slug, sections, section.id, "down")}
             className="flex size-8 items-center justify-center rounded-lg text-brand-ink-muted hover:bg-white/10"
           >
             <ArrowDown className="size-4" />
@@ -65,7 +59,7 @@ export function SectionAccordion({
           <button
             type="button"
             onClick={() => {
-              if (confirm("متأكد من حذف هذا القسم بالكامل؟")) void deleteSection(section.id).then(refresh);
+              if (confirm("متأكد من حذف هذا القسم بالكامل؟")) void deleteSection(section.id, slug);
             }}
             className="flex size-8 items-center justify-center rounded-lg text-red-400 hover:bg-red-500/10"
           >

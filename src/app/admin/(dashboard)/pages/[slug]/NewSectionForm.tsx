@@ -2,14 +2,9 @@
 
 import { Plus } from "lucide-react";
 import { createSection } from "./actions";
-import { useRefresh } from "./refresh-context";
 
 export function NewSectionForm({ pageId, slug }: { pageId: string; slug: string }) {
-  const refresh = useRefresh();
-  const action = async (formData: FormData) => {
-    await createSection(pageId, slug, formData);
-    refresh();
-  };
+  const action = createSection.bind(null, pageId, slug);
 
   return (
     <form action={action} className="glass flex items-center gap-2 rounded-2xl p-3">

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { LayoutGrid, LogOut, PanelBottom, PanelTop, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { signOut } from "@/app/admin/(dashboard)/actions";
@@ -16,7 +16,6 @@ const sitePartIcons = { navbar: PanelTop, footer: PanelBottom };
 
 export function Sidebar({ pages }: { pages: Page[] }) {
   const pathname = usePathname();
-  const router = useRouter();
   const orderedPages = pages
     .filter((page) => !sitePartSlugs.includes(page.slug))
     .sort((a, b) => navOrder.indexOf(a.slug) - navOrder.indexOf(b.slug));
@@ -81,14 +80,15 @@ export function Sidebar({ pages }: { pages: Page[] }) {
         </div>
       )}
 
-      <button
-        type="button"
-        onClick={() => void signOut().then(() => router.push("/admin/login"))}
-        className="mt-auto flex w-full items-center gap-2.5 rounded-xl px-4 py-2.5 text-sm font-semibold text-brand-ink-muted transition-colors hover:bg-white/10 hover:text-brand-rose"
-      >
-        <LogOut className="size-4.5 shrink-0" />
-        تسجيل الخروج
-      </button>
+      <form action={signOut} className="mt-auto">
+        <button
+          type="submit"
+          className="flex w-full items-center gap-2.5 rounded-xl px-4 py-2.5 text-sm font-semibold text-brand-ink-muted transition-colors hover:bg-white/10 hover:text-brand-rose"
+        >
+          <LogOut className="size-4.5 shrink-0" />
+          تسجيل الخروج
+        </button>
+      </form>
     </aside>
   );
 }

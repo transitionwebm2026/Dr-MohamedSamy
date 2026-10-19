@@ -1,4 +1,7 @@
-import { createClient } from "@/lib/supabase/client";
+"use server";
+
+import { revalidatePath } from "next/cache";
+import { createClient } from "@/lib/supabase/server";
 import type { SocialLink } from "@/lib/supabase/types";
 
 export type SettingsFormState = { ok?: boolean; error?: string } | undefined;
@@ -7,7 +10,7 @@ export async function updateGlobalSettings(
   _prevState: SettingsFormState,
   formData: FormData,
 ): Promise<SettingsFormState> {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   let socialLinks: SocialLink[] = [];
   try {
@@ -34,5 +37,7 @@ export async function updateGlobalSettings(
     .eq("id", 1);
 
   if (error) return { error: error.message };
+
+  revalidatePath("/admin/settings");
   return { ok: true };
 }

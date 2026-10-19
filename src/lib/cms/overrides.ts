@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/static";
+import { createClient } from "@/lib/supabase/server";
 
 type Json = Record<string, unknown>;
 
