@@ -1,8 +1,9 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "dr-mohamed-samy-inky.vercel.app" }],
+      "has": [{ "type": "host", "value": "dr-mohamed-samy-inky\\.vercel\\.app" }],
       "destination": "https://dr-mohamedsamy.com/:path*",
       "permanent": true
     }
