@@ -1,18 +1,24 @@
 name: Build and deploy static export to Hostinger
 
-# Three ways this runs:
+# Four ways this runs:
 # 1. Push to main — every merged code change redeploys.
 # 2. Manual "Run workflow" button in the GitHub Actions tab.
-# 3. repository_dispatch (type: cms-content-updated) — called by a Supabase
-#    Database Webhook whenever an admin edits content, so the live static
-#    site stays in sync with the dashboard without a manual rebuild. See
-#    docs/static-export-deploy.md for how to wire that webhook up.
+# 3. repository_dispatch (type: cms-content-updated) — a Supabase Database
+#    Webhook can call this for a near-instant rebuild on a dashboard edit,
+#    if one's configured. See docs/static-export-deploy.md.
+# 4. schedule (every 10 minutes) — the reliable path, independent of the
+#    webhook above. Guarantees a dashboard edit is live within 10 minutes
+#    even if no webhook is wired up (or one is temporarily broken), with no
+#    extra setup. Rebuilding when nothing changed is a harmless no-op, just
+#    a minute of CI time.
 on:
   push:
     branches: [main]
   workflow_dispatch: {}
   repository_dispatch:
     types: [cms-content-updated]
+  schedule:
+    - cron: "*/10 * * * *"
 
 concurrency:
   group: deploy-production
