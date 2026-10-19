@@ -86,7 +86,7 @@ function ContactPanel() {
       <a
         href={`tel:${settings.phone}`}
         className="animate-pulse-glow gradient-brand flex w-full items-center justify-center gap-2 rounded-full px-6 py-2.5 text-white transition-transform hover:scale-105 sm:w-auto sm:flex-1"
-        aria-label={t("callUs")}
+        aria-label={`${t("callUs")} ${settings.phoneDisplay}`}
       >
         <Phone className="size-4" />
         <span dir="ltr" className="font-montserrat text-sm font-bold">

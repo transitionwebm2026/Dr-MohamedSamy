@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ImagePlus, Loader2, X } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { compressImage } from "@/lib/image-resize";
 
 type ImageUploaderProps = {
   name?: string;
@@ -30,10 +31,11 @@ export function ImageUploader({ name, defaultValue, label, onChange }: ImageUplo
     setUploading(true);
     setError(null);
     try {
+      const compressed = await compressImage(file);
       const supabase = createClient();
-      const ext = file.name.split(".").pop();
+      const ext = compressed.name.split(".").pop();
       const path = `${crypto.randomUUID()}.${ext}`;
-      const { error: uploadError } = await supabase.storage.from("media").upload(path, file, {
+      const { error: uploadError } = await supabase.storage.from("media").upload(path, compressed, {
         cacheControl: "31536000",
         upsert: false,
       });

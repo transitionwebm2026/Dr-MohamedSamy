@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "clean-build-cache": "node -e \"require('fs').rmSync('.next/cache',{recursive:true,force:true})\"",
+    "build": "npm run clean-build-cache && next build",
     "start": "next start",
     "lint": "eslint"
   },

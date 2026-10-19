@@ -30,7 +30,7 @@ Settings → Secrets and variables → Actions → New repository secret:
 |---|---|
 | `NEXT_PUBLIC_SUPABASE_URL` | same as in `.env.local` |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | same as in `.env.local` |
-| `NEXT_PUBLIC_SITE_URL` | the real production domain, e.g. `https://dr-mohamedsami.com` |
+| `NEXT_PUBLIC_SITE_URL` | the real production domain: `https://dr-mohamedsamy.com` |
 | `HOSTINGER_FTP_SERVER` | from hPanel → Files → FTP Accounts |
 | `HOSTINGER_FTP_USERNAME` | from the same page |
 | `HOSTINGER_FTP_PASSWORD` | from the same page |

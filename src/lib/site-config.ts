@@ -1,9 +1,9 @@
 export const siteConfig = {
-  url: "https://dr-mohamedsami.com",
+  url: "https://dr-mohamedsamy.com",
   phone: "+201000000000",
   phoneDisplay: "01000000000",
   whatsapp: "https://wa.me/201000000000",
-  email: "info@dr-mohamedsami.com",
+  email: "info@dr-mohamedsamy.com",
   socials: [
     { name: "Facebook", href: "https://facebook.com" },
     { name: "Instagram", href: "https://instagram.com" },

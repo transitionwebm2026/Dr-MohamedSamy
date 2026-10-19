@@ -74,7 +74,7 @@ export async function generateMetadata({ params }: Pick<Props, "params">): Promi
       siteName: t("name"),
       images: [
         {
-          url: "/opengraph-image.png",
+          url: "/opengraph-image.jpg",
           width: 1200,
           height: 630,
           alt: `${t("name")} | ${t("title")}`,
@@ -85,12 +85,18 @@ export async function generateMetadata({ params }: Pick<Props, "params">): Promi
       card: "summary_large_image",
       title: `${t("name")} | ${t("title")}`,
       description: t("description"),
-      images: ["/opengraph-image.png"],
+      images: ["/opengraph-image.jpg"],
     },
     alternates: {
       canonical: siteUrl,
       languages: { ar: "/ar", en: "/en" },
     },
+    // Set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION to the code from Google
+    // Search Console (Settings > Ownership verification > HTML tag) to
+    // turn this on — no code change needed, just the env var + rebuild.
+    verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+      ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+      : undefined,
   };
 }
 

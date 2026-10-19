@@ -170,7 +170,7 @@ const { data: current } = await supabase.from("global_settings").select("*").eq(
 const defaults = {
   phone: "+201000000000",
   whatsapp: "https://wa.me/201000000000",
-  email: "info@dr-mohamedsami.com",
+  email: "info@dr-mohamedsamy.com",
   address_ar: ar.site.address,
   address_en: en.site.address,
   social_links: [
