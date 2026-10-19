@@ -6,11 +6,14 @@ name: Build and deploy static export to Hostinger
 # 3. repository_dispatch (type: cms-content-updated) — a Supabase Database
 #    Webhook can call this for a near-instant rebuild on a dashboard edit,
 #    if one's configured. See docs/static-export-deploy.md.
-# 4. schedule (every 10 minutes) — the reliable path, independent of the
-#    webhook above. Guarantees a dashboard edit is live within 10 minutes
-#    even if no webhook is wired up (or one is temporarily broken), with no
-#    extra setup. Rebuilding when nothing changed is a harmless no-op, just
-#    a minute of CI time.
+# 4. schedule (every 10 minutes, offset from the hour) — the reliable path,
+#    independent of the webhook above. Guarantees a dashboard edit is live
+#    within ~10 minutes with no extra setup. Rebuilding when nothing changed
+#    is a harmless no-op, just a minute of CI time. Deliberately NOT on
+#    round numbers (:00, :10, :20...) — GitHub's own docs warn schedule
+#    events queue up and get delayed/dropped at those exact minutes because
+#    every repo on GitHub schedules there; confirmed here too, zero runs
+#    fired for hours on "*/10 * * * *".
 on:
   push:
     branches: [main]
@@ -18,7 +21,7 @@ on:
   repository_dispatch:
     types: [cms-content-updated]
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "3,13,23,33,43,53 * * * *"
 
 concurrency:
   group: deploy-production
