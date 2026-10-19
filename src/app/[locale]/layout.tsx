@@ -14,6 +14,7 @@ import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { SiteSettingsProvider } from "@/components/layout/SiteSettingsProvider";
 import { getLayoutData } from "@/lib/cms/layout";
 import { getSiteUrl } from "@/lib/site-url";
+import { siteConfig } from "@/lib/site-config";
 
 // "DG Tebian" is not available as a web font; Tajawal is used as the
 // production-ready Arabic typeface it was requested as a fallback for.
@@ -137,6 +138,20 @@ export default async function LocaleLayout({ children, params }: Props) {
       className={`${tajawal.variable} ${montserrat.variable} h-full antialiased`}
     >
       <head>
+        {/*
+          Sends any *.vercel.app visitor (old links, bookmarks, deployment
+          previews) to the real domain. Done client-side, not via
+          next.config.js redirects() or vercel.json: redirects() isn't
+          available under output: 'export', and Vercel's Next.js framework
+          routing was found to take priority over vercel.json redirects for
+          already-exported pages, so that rule silently never fired. This
+          runs regardless of which layer serves the page.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if(location.hostname.endsWith(".vercel.app")){location.replace(${JSON.stringify(siteConfig.url)}+location.pathname+location.search)}`,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
