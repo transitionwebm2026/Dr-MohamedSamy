@@ -47,7 +47,7 @@ jobs:
           server: ${{ secrets.HOSTINGER_FTP_SERVER }}
           username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
           password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
-          protocol: ftps
+          protocol: ftp
           local-dir: ./out/
           # Hostinger's static-site document root for most shared plans —
           # adjust if your hPanel shows a different path.
