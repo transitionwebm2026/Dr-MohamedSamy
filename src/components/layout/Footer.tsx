@@ -213,18 +213,13 @@ export function Footer({
                 <span className="font-montserrat text-sm font-bold tracking-wide text-white">{credit.name}</span>
                 {credit.logoUrl && (
                   <span className="flex size-7 items-center justify-center rounded-lg bg-white/10">
-                    {credit.logoUrl.startsWith("/") ? (
-                      <Image
-                        src={credit.logoUrl}
-                        alt={`${credit.name} logo`}
-                        width={64}
-                        height={64}
-                        className="size-5 object-contain"
-                      />
-                    ) : (
-                      // eslint-disable-next-line @next/next/no-img-element -- remote upload from the dashboard
-                      <img src={credit.logoUrl} alt={`${credit.name} logo`} className="size-5 object-contain" />
-                    )}
+                    <Image
+                      src={credit.logoUrl}
+                      alt={`${credit.name} logo`}
+                      width={64}
+                      height={64}
+                      className="size-5 object-contain"
+                    />
                   </span>
                 )}
                 <span className="text-xs font-bold text-white">{credit.label ?? "تصميم وتطوير"}</span>

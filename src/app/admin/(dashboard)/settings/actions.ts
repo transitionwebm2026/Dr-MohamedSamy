@@ -39,5 +39,8 @@ export async function updateGlobalSettings(
   if (error) return { error: error.message };
 
   revalidatePath("/admin/settings");
+  // Global settings (phone/whatsapp/logo/address) render in the navbar and
+  // footer on every public page, so the whole site needs invalidating too.
+  revalidatePath("/", "layout");
   return { ok: true };
 }

@@ -21,7 +21,9 @@ import { siteConfig } from "@/lib/site-config";
 const tajawal = Tajawal({
   variable: "--font-tajawal",
   subsets: ["arabic", "latin"],
-  weight: ["300", "400", "500", "700", "800", "900"],
+  // Only the weights actually used by `font-*` utility classes in this
+  // codebase (300/900 were loaded but never referenced anywhere).
+  weight: ["400", "500", "700", "800"],
   display: "swap",
 });
 
@@ -35,6 +37,13 @@ const montserrat = Montserrat({
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
+
+// The public Supabase client (src/lib/supabase/public.ts) no longer touches
+// cookies(), so these pages can be cached instead of re-querying on every
+// request. The admin's save actions call revalidatePath("/", "layout") to
+// invalidate this instantly on edit; this interval is just a safety net for
+// data changed outside the dashboard (e.g. directly in Supabase).
+export const revalidate = 60;
 
 export const viewport: Viewport = {
   themeColor: "#290b4c",

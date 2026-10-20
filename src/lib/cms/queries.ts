@@ -1,5 +1,5 @@
 import { cache } from "react";
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import type { DynamicItem, GlobalSettings, Page, PageSection } from "@/lib/supabase/types";
 
 /**
@@ -10,7 +10,7 @@ import type { DynamicItem, GlobalSettings, Page, PageSection } from "@/lib/supab
  */
 
 export const getGlobalSettings = cache(async (): Promise<GlobalSettings | null> => {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const { data } = await supabase.from("global_settings").select("*").eq("id", 1).maybeSingle();
   return data ?? null;
 });
@@ -24,7 +24,7 @@ export const getGlobalSettings = cache(async (): Promise<GlobalSettings | null> 
  * times (10+ sequential round trips per page load before this change).
  */
 export const loadRawCmsData = cache(async (): Promise<{ pages: Page[]; sections: PageSection[]; items: DynamicItem[] }> => {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const [pagesRes, sectionsRes, itemsRes] = await Promise.all([
     supabase.from("pages").select("*"),
     supabase.from("page_sections").select("*"),

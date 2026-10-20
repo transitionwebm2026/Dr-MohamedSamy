@@ -7,6 +7,12 @@ export type ActionState = { ok?: boolean; error?: string } | undefined;
 
 async function revalidate(slug: string) {
   revalidatePath(`/admin/pages/${slug}`);
+  // Public pages are now cached (see src/lib/supabase/public.ts) — without
+  // this, an edit wouldn't show up on the live site until the layout's
+  // 60s safety-net revalidation. "navbar"/"footer"/"contact" sections also
+  // feed every page's shared layout, not just their own slug, so the whole
+  // site is invalidated rather than trying to map slug -> affected paths.
+  revalidatePath("/", "layout");
 }
 
 // ---------------------------------------------------------------------------

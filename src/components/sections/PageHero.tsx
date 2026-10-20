@@ -26,19 +26,14 @@ function HeroBackground({ src }: { src?: string }) {
 
   return (
     <div className="absolute inset-0 -z-20 overflow-hidden">
-      {src ? (
-        // eslint-disable-next-line @next/next/no-img-element -- remote upload from the dashboard, needs to behave like fill
-        <img src={src} alt="" className={cn("absolute inset-0 h-full w-full object-cover", objectPosition)} />
-      ) : (
-        <Image
-          src="/images/hero-doctor.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className={cn("object-cover", objectPosition)}
-        />
-      )}
+      <Image
+        src={src || "/images/hero-doctor.jpg"}
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className={cn("object-cover", objectPosition)}
+      />
       <div
         className={cn(
           "absolute inset-0 bg-[radial-gradient(circle_at_25%_30%,rgba(225,148,159,0.18),transparent_60%)]",
