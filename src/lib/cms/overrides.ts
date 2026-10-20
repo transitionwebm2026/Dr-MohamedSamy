@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { getGlobalSettings, loadRawCmsData } from "@/lib/cms/queries";
 
 type Json = Record<string, unknown>;
 
@@ -170,25 +170,19 @@ const simpleItemPaths: Record<string, Record<string, string>> = {
 type PageData = { id: string; sections: Map<string, { content: Json; items: DbItem[] }> };
 
 async function loadAllPages(): Promise<Map<string, PageData>> {
-  const supabase = await createClient();
-
-  const { data: pages } = await supabase.from("pages").select("id, slug");
-  const { data: sections } = await supabase.from("page_sections").select("id, page_id, section_key, content");
-  const { data: items } = await supabase
-    .from("dynamic_items_collections")
-    .select("section_id, item_key, title_ar, title_en, description_ar, description_en, extra");
+  const { pages, sections, items } = await loadRawCmsData();
 
   const itemsBySection = new Map<string, DbItem[]>();
-  for (const item of items ?? []) {
+  for (const item of items) {
     const list = itemsBySection.get(item.section_id) ?? [];
     list.push(item);
     itemsBySection.set(item.section_id, list);
   }
 
   const result = new Map<string, PageData>();
-  for (const page of pages ?? []) {
+  for (const page of pages) {
     const sectionMap = new Map<string, { content: Json; items: DbItem[] }>();
-    for (const section of sections ?? []) {
+    for (const section of sections) {
       if (section.page_id !== page.id) continue;
       sectionMap.set(section.section_key, {
         content: (section.content as Json) ?? {},
@@ -400,17 +394,11 @@ function deepMerge(target: Json, patch: Json): Json {
 /** Overlays live CMS content onto the static next-intl messages, per-field, leaving anything not customized untouched. */
 export async function applyMessageOverrides(locale: string, messages: Json): Promise<Json> {
   try {
-    const pages = await loadAllPages();
+    const [pages, settings] = await Promise.all([loadAllPages(), getGlobalSettings()]);
     const patch: Json = {};
     for (const [slug, page] of pages) applyPage(patch, slug, page, locale);
 
     // The clinic address lives in the global settings; the footer and contact page read it as `site.address`.
-    const supabase = await createClient();
-    const { data: settings } = await supabase
-      .from("global_settings")
-      .select("address_ar, address_en")
-      .eq("id", 1)
-      .maybeSingle();
     const address = locale === "ar" ? settings?.address_ar : settings?.address_en;
     if (address) setPath(patch, "site.address", address);
 

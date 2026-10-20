@@ -1,5 +1,6 @@
+import { cache } from "react";
 import { createClient } from "@/lib/supabase/server";
-import type { DynamicItem, GlobalSettings, PageSection } from "@/lib/supabase/types";
+import type { DynamicItem, GlobalSettings, Page, PageSection } from "@/lib/supabase/types";
 
 /**
  * Data access layer for the public site. Every function degrades to `null`
@@ -8,42 +9,53 @@ import type { DynamicItem, GlobalSettings, PageSection } from "@/lib/supabase/ty
  * yet (or a section's row simply doesn't exist).
  */
 
-export async function getGlobalSettings(): Promise<GlobalSettings | null> {
+export const getGlobalSettings = cache(async (): Promise<GlobalSettings | null> => {
   const supabase = await createClient();
   const { data } = await supabase.from("global_settings").select("*").eq("id", 1).maybeSingle();
   return data ?? null;
-}
+});
+
+/**
+ * Every page/section/item in the site, fetched in 3 parallel queries instead
+ * of walking pages -> sections -> items one round trip at a time. Cached per
+ * request (React `cache`) so the navbar, footer, every page's own content,
+ * and the i18n override layer all share this one fetch instead of each
+ * re-querying Supabase — this was the main source of the multi-second SSR
+ * times (10+ sequential round trips per page load before this change).
+ */
+export const loadRawCmsData = cache(async (): Promise<{ pages: Page[]; sections: PageSection[]; items: DynamicItem[] }> => {
+  const supabase = await createClient();
+  const [pagesRes, sectionsRes, itemsRes] = await Promise.all([
+    supabase.from("pages").select("*"),
+    supabase.from("page_sections").select("*"),
+    supabase.from("dynamic_items_collections").select("*"),
+  ]);
+  return {
+    pages: pagesRes.data ?? [],
+    sections: sectionsRes.data ?? [],
+    items: itemsRes.data ?? [],
+  };
+});
 
 export type SectionWithItems = PageSection & { items: DynamicItem[] };
 
 export async function getPageSections(slug: string): Promise<SectionWithItems[]> {
-  const supabase = await createClient();
+  const { pages, sections, items } = await loadRawCmsData();
 
-  const { data: page } = await supabase.from("pages").select("id").eq("slug", slug).eq("is_active", true).maybeSingle();
+  const page = pages.find((p) => p.slug === slug && p.is_active);
   if (!page) return [];
 
-  const { data: sections } = await supabase
-    .from("page_sections")
-    .select("*")
-    .eq("page_id", page.id)
-    .eq("is_visible", true)
-    .order("order_index");
+  const pageSections = sections
+    .filter((s) => s.page_id === page.id && s.is_visible)
+    .sort((a, b) => a.order_index - b.order_index);
 
-  if (!sections || sections.length === 0) return [];
+  if (pageSections.length === 0) return [];
 
-  const { data: items } = await supabase
-    .from("dynamic_items_collections")
-    .select("*")
-    .in(
-      "section_id",
-      sections.map((s) => s.id),
-    )
-    .eq("is_visible", true)
-    .order("order_index");
-
-  return sections.map((section) => ({
+  return pageSections.map((section) => ({
     ...section,
-    items: (items ?? []).filter((item) => item.section_id === section.id),
+    items: items
+      .filter((item) => item.section_id === section.id && item.is_visible)
+      .sort((a, b) => a.order_index - b.order_index),
   }));
 }
 
